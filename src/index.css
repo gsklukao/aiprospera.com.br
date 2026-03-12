@@ -251,9 +251,9 @@ button {
 
 /* === Section Utilities === */
 .section-container {
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 var(--space-2xl);
 }
 
 .section-header {

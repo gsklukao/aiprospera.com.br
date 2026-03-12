@@ -280,11 +280,12 @@ function App() {
 
       <main style={{ paddingTop: '5rem' }}>
         {/* ===== HERO ===== */}
-        <section style={{ position: 'relative', minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'var(--space-3xl) 0 var(--space-xl)' }}>
+        <section style={{ position: 'relative', minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'var(--space-4xl) 0 var(--space-2xl)' }}>
           <div className="hero-grid-bg" />
           
           <div className="section-container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '100%', maxWidth: '900px', margin: '0 auto', height: '300px', display: 'flex', justifyContent: 'center' }}>
+            {/* Hero Carousel — sem altura fixa, conteúdo flui naturalmente */}
+            <div style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', minHeight: '280px' }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -292,18 +293,17 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -25 }}
                   transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  style={{ position: 'absolute', width: '100%' }}
                 >
-                  <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)' }}>
+                  <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)', display: 'inline-flex' }}>
                     <Zap size={14} /> <span>{heroSlides[currentSlide].badge}</span>
                   </div>
 
-                  <h1 style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', lineHeight: 1.1, marginBottom: 'var(--space-md)' }}>
+                  <h1 style={{ fontSize: 'clamp(2.75rem, 5.5vw, 5rem)', lineHeight: 1.05, marginBottom: 'var(--space-lg)' }}>
                     {heroSlides[currentSlide].title1} <br />
                     <span className="text-gradient">{heroSlides[currentSlide].title2}</span>
                   </h1>
 
-                  <p style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--color-text-muted)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.7 }}>
+                  <p style={{ fontSize: 'clamp(1.05rem, 1.6vw, 1.25rem)', color: 'var(--color-text-muted)', maxWidth: '680px', margin: '0 auto', lineHeight: 1.75 }}>
                     {heroSlides[currentSlide].desc}
                   </p>
                 </motion.div>
@@ -311,7 +311,7 @@ function App() {
             </div>
 
             {/* Slide Indicators */}
-            <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', margin: '0 0 var(--space-xl)' }}>
+            <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', margin: 'var(--space-xl) 0 var(--space-lg)' }}>
               {heroSlides.map((_, i) => (
                 <button
                   key={i}
