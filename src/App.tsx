@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { 
   Bot, Zap, ArrowRight, Activity, Car, Users, CheckCircle2, 
-  MessageSquare, PhoneCall, ChevronDown, Menu, X, 
-  Search, Cpu, Rocket, BarChart3, Shield, Clock,
+  MessageSquare, PhoneCall, ChevronDown, X, 
+  Search, Cpu, Rocket, BarChart3, Shield,
   Linkedin, Instagram, Mail, MapPin, Phone
 } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
