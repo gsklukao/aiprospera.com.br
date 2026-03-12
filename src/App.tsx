@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { 
-  Bot, Zap, ArrowRight, Activity, Car, Users, CheckCircle2, 
-  MessageSquare, PhoneCall, ChevronDown, X, 
+import {
+  Bot, Zap, ArrowRight, Activity, Car, Users, CheckCircle2,
+  MessageSquare, PhoneCall, ChevronDown, X,
   Search, Cpu, Rocket, BarChart3, Shield,
   Linkedin, Instagram, Mail, MapPin, Phone
 } from 'lucide-react';
@@ -10,14 +10,14 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 /* ============================
    Counter Animation Hook
    ============================ */
-function useCountUp(end: number, duration: number = 2000, startOnView: boolean = true) {
+function useCountUp(end: number, duration: number = 2000) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const hasStarted = useRef(false);
 
   useEffect(() => {
-    if (startOnView && !isInView) return;
+    if (!isInView) return;
     if (hasStarted.current) return;
     hasStarted.current = true;
 
@@ -30,7 +30,7 @@ function useCountUp(end: number, duration: number = 2000, startOnView: boolean =
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  }, [end, duration, isInView, startOnView]);
+  }, [end, duration, isInView]);
 
   return { count, ref };
 }
@@ -80,6 +80,30 @@ const scaleIn = {
 };
 
 /* ============================
+   Stat Mini Card (hero lateral)
+   ============================ */
+function HeroStatCard({ icon, label, value, subtext, accentColor, barGradient }: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  subtext: string;
+  accentColor: string;
+  barGradient: string;
+}) {
+  return (
+    <div className="glass-panel" style={{ borderRadius: 'var(--radius-xl)', padding: 'var(--space-lg)', borderColor: `rgba(${accentColor}, 0.15)` }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-sm)' }}>
+        {icon}
+        <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</span>
+      </div>
+      <p style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--color-text-main)', lineHeight: 1 }}>{value}</p>
+      <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>{subtext}</p>
+      <div style={{ marginTop: '0.75rem', height: '3px', borderRadius: '2px', background: barGradient }} />
+    </div>
+  );
+}
+
+/* ============================
    FAQ Item Component
    ============================ */
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
@@ -97,10 +121,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
         aria-controls={`faq-answer-${index}`}
       >
         <span>{q}</span>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.25 }}
-        >
+        <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
           <ChevronDown size={20} color="var(--color-text-muted)" />
         </motion.div>
       </button>
@@ -130,7 +151,6 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Counter hooks
   const counter1 = useCountUp(500, 2000);
   const counter2 = useCountUp(98, 2000);
   const counter3 = useCountUp(24, 1500);
@@ -170,7 +190,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -178,7 +197,7 @@ function App() {
 
   const navLinks = [
     { label: 'Soluções', href: '#solucoes' },
-    { label: 'O Ecossistema', href: '#ecossistema' },
+    { label: 'Ecossistema', href: '#ecossistema' },
     { label: 'Como Funciona', href: '#como-funciona' },
     { label: 'Planos', href: '#planos' },
     { label: 'FAQ', href: '#faq' },
@@ -188,6 +207,7 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
+
       {/* Background Ambient Glows */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -1, pointerEvents: 'none' }}>
         <div style={{ position: 'absolute', top: '-15%', left: '-10%', width: '45vw', height: '45vw', background: 'radial-gradient(circle, rgba(0,240,255,0.06) 0%, transparent 70%)', filter: 'blur(80px)' }} />
@@ -197,7 +217,7 @@ function App() {
 
       {/* ===== NAVBAR ===== */}
       <header className={`floating-nav ${scrolled ? 'scrolled' : ''}`}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <a href="#" style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: 'var(--font-heading)' }}>
             Ai<span className="text-gradient">Prospera</span>
           </a>
@@ -279,79 +299,188 @@ function App() {
       </AnimatePresence>
 
       <main style={{ paddingTop: '5rem' }}>
-        {/* ===== HERO ===== */}
-        <section style={{ position: 'relative', minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'var(--space-4xl) 0 var(--space-2xl)' }}>
+
+        {/* ===== HERO =====
+            92vh → a seção de métricas abaixo aparece ~8vh na dobra
+        */}
+        <section style={{ position: 'relative', minHeight: '92vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
           <div className="hero-grid-bg" />
-          
-          <div className="section-container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-            {/* Hero Carousel — sem altura fixa, conteúdo flui naturalmente */}
-            <div style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', minHeight: '280px' }}>
+
+          {/* Wrapper 3 colunas: card esq | texto central | card dir */}
+          <div style={{
+            width: '100%',
+            maxWidth: '1400px',
+            margin: '0 auto',
+            padding: 'var(--space-xl) var(--space-xl) var(--space-3xl)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 2fr 1fr',
+            gap: 'var(--space-xl)',
+            alignItems: 'center',
+            position: 'relative',
+            zIndex: 1,
+          }}>
+
+            {/* Coluna Esquerda */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}
+              className="hero-side-cards"
+            >
+              <HeroStatCard
+                icon={<MessageSquare size={15} color="var(--color-primary)" />}
+                label="WhatsApp IA"
+                value="50k+"
+                subtext="mensagens atendidas/mês"
+                accentColor="0,240,255"
+                barGradient="linear-gradient(90deg, var(--color-primary), transparent)"
+              />
+              <HeroStatCard
+                icon={<Activity size={15} color="#b56dfc" />}
+                label="Uptime"
+                value="99.9%"
+                subtext="disponibilidade garantida"
+                accentColor="123,44,191"
+                barGradient="linear-gradient(90deg, #7b2cbf, transparent)"
+              />
+              <HeroStatCard
+                icon={<CheckCircle2 size={15} color="var(--color-success)" />}
+                label="Satisfação"
+                value="98%"
+                subtext="dos clientes aprovam"
+                accentColor="34,197,94"
+                barGradient="linear-gradient(90deg, var(--color-success), transparent)"
+              />
+            </motion.div>
+
+            {/* Coluna Central — texto */}
+            <div style={{ textAlign: 'center', padding: '0 var(--space-md)' }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
-                  initial={{ opacity: 0, y: 25 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -25 }}
+                  exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
                   <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)', display: 'inline-flex' }}>
                     <Zap size={14} /> <span>{heroSlides[currentSlide].badge}</span>
                   </div>
 
-                  <h1 style={{ fontSize: 'clamp(2.75rem, 5.5vw, 5rem)', lineHeight: 1.05, marginBottom: 'var(--space-lg)' }}>
+                  <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 4rem)', lineHeight: 1.05, marginBottom: 'var(--space-lg)' }}>
                     {heroSlides[currentSlide].title1} <br />
                     <span className="text-gradient">{heroSlides[currentSlide].title2}</span>
                   </h1>
 
-                  <p style={{ fontSize: 'clamp(1.05rem, 1.6vw, 1.25rem)', color: 'var(--color-text-muted)', maxWidth: '680px', margin: '0 auto', lineHeight: 1.75 }}>
+                  <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', color: 'var(--color-text-muted)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.8 }}>
                     {heroSlides[currentSlide].desc}
                   </p>
                 </motion.div>
               </AnimatePresence>
+
+              {/* Indicadores */}
+              <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', margin: 'var(--space-xl) 0 var(--space-lg)' }}>
+                {heroSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentSlide(i)}
+                    style={{
+                      width: i === currentSlide ? '28px' : '8px',
+                      height: '8px',
+                      borderRadius: '4px',
+                      background: i === currentSlide ? 'var(--color-primary)' : 'rgba(255,255,255,0.15)',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      cursor: 'pointer',
+                      border: 'none',
+                      padding: 0,
+                      boxShadow: i === currentSlide ? '0 0 12px rgba(0,240,255,0.4)' : 'none',
+                    }}
+                    aria-label={`Ir para slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}
+              >
+                <a href="#solucoes" className="btn-primary" style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}>
+                  Conheça as Soluções <ArrowRight size={18} />
+                </a>
+                <a href="#planos" className="btn-secondary" style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}>
+                  Ver Planos
+                </a>
+              </motion.div>
             </div>
 
-            {/* Slide Indicators */}
-            <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', margin: 'var(--space-xl) 0 var(--space-lg)' }}>
-              {heroSlides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlide(i)}
-                  style={{
-                    width: i === currentSlide ? '28px' : '8px',
-                    height: '8px',
-                    borderRadius: '4px',
-                    background: i === currentSlide ? 'var(--color-primary)' : 'rgba(255,255,255,0.15)',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    cursor: 'pointer',
-                    border: 'none',
-                    padding: 0,
-                    boxShadow: i === currentSlide ? '0 0 12px rgba(0,240,255,0.4)' : 'none',
-                  }}
-                  aria-label={`Ir para slide ${i + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Hero CTA */}
+            {/* Coluna Direita */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              style={{ display: 'flex', gap: 'var(--space-lg)', justifyContent: 'center', flexWrap: 'wrap' }}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}
+              className="hero-side-cards"
             >
-              <a href="#solucoes" className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.05rem' }}>
-                Conheça as Soluções <ArrowRight size={18} />
-              </a>
-              <a href="#planos" className="btn-secondary" style={{ padding: '1rem 2.5rem', fontSize: '1.05rem' }}>
-                Ver Planos
-              </a>
+              {/* Card: Chatbot em ação */}
+              <div className="glass-panel" style={{ borderRadius: 'var(--radius-xl)', padding: 'var(--space-lg)', borderColor: 'rgba(0,180,216,0.15)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-sm)' }}>
+                  <Bot size={15} color="var(--color-accent)" />
+                  <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Chatbot IA</span>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-main)', lineHeight: 1.55, fontStyle: 'italic' }}>
+                  "Seu pedido #4821 está a caminho! Previsão: 14h."
+                </p>
+                <div style={{ marginTop: 'var(--space-sm)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--color-success)', boxShadow: '0 0 6px rgba(34,197,94,0.8)' }} />
+                  <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Respondido em 0.3s</span>
+                </div>
+              </div>
+
+              <HeroStatCard
+                icon={<PhoneCall size={15} color="var(--color-primary)" />}
+                label="IFinanças"
+                value="R$127K"
+                subtext="recuperados este mês"
+                accentColor="0,240,255"
+                barGradient="linear-gradient(90deg, var(--color-primary), var(--color-secondary))"
+              />
+
+              <HeroStatCard
+                icon={<Users size={15} color="#b56dfc" />}
+                label="Clientes"
+                value="500+"
+                subtext="empresas automatizadas"
+                accentColor="123,44,191"
+                barGradient="linear-gradient(90deg, #7b2cbf, transparent)"
+              />
             </motion.div>
+
           </div>
+
+          {/* Seta de scroll indicando mais conteúdo */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            style={{ position: 'absolute', bottom: '1.25rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}
+          >
+            <span style={{ fontSize: '0.65rem', color: 'var(--color-text-dim)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Scroll</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+            >
+              <ChevronDown size={18} color="var(--color-text-dim)" />
+            </motion.div>
+          </motion.div>
         </section>
 
-        {/* ===== SOCIAL PROOF / METRICS ===== */}
-        <section style={{ padding: 'var(--space-3xl) 0' }}>
-          <div className="section-container">
+        {/* ===== MÉTRICAS / SOCIAL PROOF ===== */}
+        <section style={{ padding: 'var(--space-2xl) 0 var(--space-3xl)' }}>
+          <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -360,35 +489,39 @@ function App() {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 'var(--space-lg)',
                 borderRadius: 'var(--radius-2xl)',
                 border: '1px solid var(--color-border)',
                 background: 'var(--color-bg-glass)',
                 backdropFilter: 'blur(16px)',
-                padding: 'var(--space-xl) 0',
+                overflow: 'hidden',
               }}
             >
               {[
-                { ref: counter1.ref, count: counter1.count, suffix: '+', label: 'Empresas Atendidas', prefix: '' },
-                { ref: counter2.ref, count: counter2.count, suffix: '%', label: 'Taxa de Satisfação', prefix: '' },
-                { ref: counter3.ref, count: counter3.count, suffix: '/7', label: 'Atendimento Contínuo', prefix: '' },
-                { ref: counter4.ref, count: counter4.count, suffix: 'k+', label: 'Interações/Mês', prefix: '' },
+                { ref: counter1.ref, count: counter1.count, suffix: '+', label: 'Empresas Atendidas' },
+                { ref: counter2.ref, count: counter2.count, suffix: '%', label: 'Taxa de Satisfação' },
+                { ref: counter3.ref, count: counter3.count, suffix: '/7', label: 'Atendimento Contínuo' },
+                { ref: counter4.ref, count: counter4.count, suffix: 'k+', label: 'Interações/Mês' },
               ].map((stat, i) => (
-                <motion.div key={i} variants={scaleIn} className="stat-counter" ref={stat.ref}>
+                <motion.div
+                  key={i}
+                  variants={scaleIn}
+                  ref={stat.ref}
+                  className="stat-counter"
+                  style={{ borderRight: i < 3 ? '1px solid var(--color-border)' : 'none', padding: 'var(--space-2xl) var(--space-lg)' }}
+                >
                   <div className="stat-number">
-                    <span className="text-gradient-accent">{stat.prefix}{stat.count}{stat.suffix}</span>
+                    <span className="text-gradient-accent">{stat.count}{stat.suffix}</span>
                   </div>
                   <div className="stat-label">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
           </div>
-          <style>{`@media(max-width:767px){.stat-grid-responsive{grid-template-columns:repeat(2,1fr)!important}}`}</style>
         </section>
 
         {/* ===== SOLUÇÕES BASE ===== */}
         <section id="solucoes" style={{ padding: 'var(--space-3xl) 0 var(--space-4xl)' }}>
-          <div className="section-container">
+          <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeInUp} className="section-header">
               <h2 className="section-title">
                 Sua Operação em <span className="text-gradient">Piloto Automático</span>
@@ -401,12 +534,12 @@ function App() {
               style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-xl)' }}
             >
               {[
-                { icon: <MessageSquare size={28} color="var(--color-primary)" />, title: 'Automação de WhatsApp', desc: 'Atenda clientes, qualifique leads e venda automaticamente de forma natural e humanizada no principal canal de comunicação.', color: 'primary' },
-                { icon: <Bot size={28} color="#b56dfc" />, title: 'Chatbots de Alta Conversão', desc: 'Esqueça as árvores de botões rígidas. Nossos chatbots compreendem a intenção real e mantém conversas fluídas 24h por dia.', color: 'secondary' },
-                { icon: <PhoneCall size={28} color="var(--color-accent)" />, title: 'Agentes de Voz via IA', desc: 'IA que atende o telefone da sua empresa, ouve o cliente, processa a demanda e resolve o problema sem fricção.', color: 'accent' }
+                { icon: <MessageSquare size={28} color="var(--color-primary)" />, title: 'Automação de WhatsApp', desc: 'Atenda clientes, qualifique leads e venda automaticamente de forma natural e humanizada no principal canal de comunicação.', boxClass: '' },
+                { icon: <Bot size={28} color="#b56dfc" />, title: 'Chatbots de Alta Conversão', desc: 'Esqueça as árvores de botões rígidas. Nossos chatbots compreendem a intenção real e mantém conversas fluídas 24h por dia.', boxClass: 'icon-box-secondary' },
+                { icon: <PhoneCall size={28} color="var(--color-accent)" />, title: 'Agentes de Voz via IA', desc: 'IA que atende o telefone da sua empresa, ouve o cliente, processa a demanda e resolve o problema sem fricção.', boxClass: '' }
               ].map((item, i) => (
                 <motion.div key={i} variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
-                  <div className={`icon-box ${item.color === 'secondary' ? 'icon-box-secondary' : ''}`} style={item.color === 'accent' ? { background: 'rgba(0,180,216,0.12)', borderColor: 'rgba(0,180,216,0.15)' } : {}}>
+                  <div className={`icon-box ${item.boxClass}`} style={i === 2 ? { background: 'rgba(0,180,216,0.12)', borderColor: 'rgba(0,180,216,0.15)' } : {}}>
                     {item.icon}
                   </div>
                   <h3 style={{ fontSize: '1.35rem', marginTop: 'var(--space-lg)', marginBottom: 'var(--space-sm)' }}>{item.title}</h3>
@@ -420,22 +553,19 @@ function App() {
         {/* ===== ECOSSISTEMA ===== */}
         <section id="ecossistema" style={{ padding: 'var(--space-4xl) 0', position: 'relative' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 0%, rgba(0,240,255,0.02) 50%, transparent 100%)', zIndex: -1 }} />
-          <div className="section-container">
+          <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-              <div className="badge-pill-secondary" style={{ marginBottom: 'var(--space-md)' }}>O ECOSSISTEMA AIPROSPERA</div>
+              <div className="badge-pill badge-pill-secondary" style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}>O ECOSSISTEMA AIPROSPERA</div>
               <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: 'var(--space-lg)' }}>
                 Soluções modulares para <br />cada <span className="text-gradient">etapa do seu negócio</span>
               </h2>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', marginTop: 'var(--space-2xl)' }}>
-              {/* IFinanças - Feature Card */}
               <motion.div variants={fadeInUp} className="glass-card" style={{ display: 'flex', flexWrap: 'wrap', borderRadius: 'var(--radius-2xl)', overflow: 'hidden', padding: 0 }}>
                 <div style={{ flex: '1 1 500px', padding: 'var(--space-3xl)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
-                    <div className="icon-box">
-                      <Activity size={24} color="var(--color-primary)" />
-                    </div>
+                    <div className="icon-box"><Activity size={24} color="var(--color-primary)" /></div>
                     <h3 style={{ fontSize: '1.75rem', margin: 0 }}>IFinanças</h3>
                   </div>
                   <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: 'var(--space-xl)' }}>
@@ -451,12 +581,10 @@ function App() {
                 </div>
                 <div style={{ flex: '1 1 350px', background: 'rgba(0,0,0,0.25)', minHeight: '280px', borderLeft: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', width: '180px', height: '180px', background: 'var(--color-primary)', filter: 'blur(100px)', opacity: 0.12 }} />
-                  <div style={{ position: 'absolute', width: '120px', height: '120px', background: 'var(--color-secondary)', filter: 'blur(80px)', opacity: 0.08, top: '20%', right: '20%' }} />
                   <Activity size={100} color="var(--color-border)" style={{ opacity: 0.25 }} />
                 </div>
               </motion.div>
 
-              {/* Drive & Conecta */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'var(--space-xl)' }}>
                 <motion.div variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
                   <div className="icon-box-secondary" style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-lg)' }}>
@@ -471,35 +599,30 @@ function App() {
                     <Users size={28} color="var(--color-accent)" />
                   </div>
                   <h3 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>AiProspera Conecta</h3>
-                  <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>A plataforma inteligente que une necessidades e ofícios. Match instantâneo entre prestadores de serviço qualificados e quem mais precisa deles.</p>
+                  <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>Match instantâneo entre prestadores de serviço qualificados e quem mais precisa deles.</p>
                 </motion.div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* ===== COMO FUNCIONA (TIMELINE) ===== */}
+        {/* ===== COMO FUNCIONA ===== */}
         <section id="como-funciona" style={{ padding: 'var(--space-4xl) 0' }}>
-          <div className="section-container">
+          <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="section-header">
-              <div className="badge-pill" style={{ marginBottom: 'var(--space-md)' }}>
+              <div className="badge-pill" style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}>
                 <Rocket size={14} /> COMO FUNCIONA
               </div>
-              <h2 className="section-title">
-                Da análise ao resultado em <span className="text-gradient">4 passos</span>
-              </h2>
+              <h2 className="section-title">Da análise ao resultado em <span className="text-gradient">4 passos</span></h2>
               <p className="section-subtitle">Um processo simples e transparente para transformar suas operações.</p>
             </motion.div>
 
-            <motion.div
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-              style={{ maxWidth: '700px', margin: '0 auto' }}
-            >
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} style={{ maxWidth: '700px', margin: '0 auto' }}>
               {[
                 { step: 1, icon: <Search size={20} />, title: 'Análise Personalizada', desc: 'Mapeamos seus processos, identificamos gargalos e desenhamos uma solução de IA sob medida para o seu negócio.' },
                 { step: 2, icon: <Cpu size={20} />, title: 'Integração da IA', desc: 'Nosso time configura e treina os agentes de IA com os dados e fluxos específicos da sua operação.' },
                 { step: 3, icon: <Rocket size={20} />, title: 'Ativação Automática', desc: 'Os funcionários digitais entram em operação, atendendo clientes e executando tarefas automaticamente.' },
-                { step: 4, icon: <BarChart3 size={20} />, title: 'Resultados Mensuráveis', desc: 'Acompanhe métricas em tempo real no painel e veja o impacto direto na receita, produtividade e satisfação dos clientes.' }
+                { step: 4, icon: <BarChart3 size={20} />, title: 'Resultados Mensuráveis', desc: 'Acompanhe métricas em tempo real e veja o impacto direto na receita, produtividade e satisfação.' }
               ].map((item, i) => (
                 <motion.div key={i} variants={fadeInUp} className="timeline-step">
                   <div style={{ position: 'relative' }}>
@@ -507,9 +630,7 @@ function App() {
                     {i < 3 && <div className="timeline-line" />}
                   </div>
                   <div className="timeline-content" style={{ paddingTop: '0.5rem' }}>
-                    <h4 style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
-                      {item.icon} {item.title}
-                    </h4>
+                    <h4 style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>{item.icon} {item.title}</h4>
                     <p>{item.desc}</p>
                   </div>
                 </motion.div>
@@ -521,7 +642,7 @@ function App() {
         {/* ===== PLANOS ===== */}
         <section id="planos" style={{ padding: 'var(--space-4xl) 0', position: 'relative' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 0%, rgba(123,44,191,0.02) 50%, transparent 100%)', zIndex: -1 }} />
-          <div className="section-container">
+          <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="section-header">
               <h2 className="section-title">Planos que Crescem <span className="text-gradient">Com Você</span></h2>
               <p className="section-subtitle">Comece pequeno, ou vá all-in na automação corporativa.</p>
@@ -531,16 +652,13 @@ function App() {
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
               style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-xl)', alignItems: 'center' }}
             >
-              {/* Starter */}
               <motion.div variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
                 <h3 style={{ fontSize: '1.35rem', marginBottom: 'var(--space-xs)' }}>Starter</h3>
-                <p style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-xl)', fontSize: '0.95rem' }}>Para empreendedores dando o primeiro passo na IA.</p>
+                <p style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-xl)', fontSize: '0.95rem' }}>Para empreendedores dando o primeiro passo.</p>
                 <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: 'var(--space-xl)' }}>
                   R$297<span style={{ fontSize: '1rem', color: 'var(--color-text-muted)', fontWeight: 400 }}>/mês</span>
                 </div>
-                <button className="btn-secondary" style={{ width: '100%', padding: 'var(--space-md)', marginBottom: 'var(--space-xl)' }}>
-                  Assinar Starter
-                </button>
+                <button className="btn-secondary" style={{ width: '100%', padding: 'var(--space-md)', marginBottom: 'var(--space-xl)' }}>Assinar Starter</button>
                 <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                   {['Chatbot Base WhatsApp', 'Até 1000 interações', 'Suporte em horário comercial'].map((f, i) => (
                     <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>
@@ -550,16 +668,8 @@ function App() {
                 </ul>
               </motion.div>
 
-              {/* Pro - Highlighted */}
-              <motion.div variants={fadeInUp} className="glass-card" style={{
-                padding: 'calc(var(--space-2xl) + 0.5rem) var(--space-2xl)',
-                position: 'relative',
-                border: '1px solid rgba(0,240,255,0.3)',
-                background: 'linear-gradient(180deg, rgba(0,240,255,0.04) 0%, var(--color-bg-glass) 100%)',
-                transform: 'scale(1.03)',
-                boxShadow: 'var(--shadow-glow-primary)',
-              }}>
-                <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))', color: '#000', padding: '0.25rem 1rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>
+              <motion.div variants={fadeInUp} className="glass-card" style={{ padding: 'calc(var(--space-2xl) + 0.5rem) var(--space-2xl)', position: 'relative', border: '1px solid rgba(0,240,255,0.3)', background: 'linear-gradient(180deg, rgba(0,240,255,0.04) 0%, var(--color-bg-glass) 100%)', transform: 'scale(1.03)', boxShadow: 'var(--shadow-glow-primary)' }}>
+                <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))', color: '#000', padding: '0.25rem 1rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
                   MAIS POPULAR
                 </div>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-xs)' }}>Pro</h3>
@@ -567,9 +677,7 @@ function App() {
                 <div style={{ fontSize: '2.75rem', fontWeight: 700, marginBottom: 'var(--space-xl)' }}>
                   R$897<span style={{ fontSize: '1rem', color: 'var(--color-text-muted)', fontWeight: 400 }}>/mês</span>
                 </div>
-                <button className="btn-primary" style={{ width: '100%', padding: 'var(--space-md)', marginBottom: 'var(--space-xl)' }}>
-                  Assinar Pro
-                </button>
+                <button className="btn-primary" style={{ width: '100%', padding: 'var(--space-md)', marginBottom: 'var(--space-xl)' }}>Assinar Pro</button>
                 <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                   {['Integração com 3 canais', 'Qualificação avançada de Leads', 'Dashboard Analytics', 'Suporte Prioritário'].map((f, i) => (
                     <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem' }}>
@@ -579,18 +687,15 @@ function App() {
                 </ul>
               </motion.div>
 
-              {/* Enterprise */}
               <motion.div variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
                 <h3 style={{ fontSize: '1.35rem', marginBottom: 'var(--space-xs)' }}>Enterprise</h3>
                 <p style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-xl)', fontSize: '0.95rem' }}>Ecossistema Full para corporações de alto volume.</p>
                 <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: 'var(--space-xl)' }}>
                   Sob<span style={{ fontSize: '1rem', color: 'var(--color-text-muted)', fontWeight: 400 }}> medida</span>
                 </div>
-                <button className="btn-secondary" style={{ width: '100%', padding: 'var(--space-md)', marginBottom: 'var(--space-xl)' }}>
-                  Falar com Especialista
-                </button>
+                <button className="btn-secondary" style={{ width: '100%', padding: 'var(--space-md)', marginBottom: 'var(--space-xl)' }}>Falar com Especialista</button>
                 <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-                  {['Acesso a IFinanças & Drive', 'Agentes de Voz dedicados', 'Integração ERP personalizada', 'SLAs dedicados'].map((f, i) => (
+                  {['Acesso a IFinanças & Drive', 'Agentes de Voz dedicados', 'Integração ERP', 'SLAs dedicados'].map((f, i) => (
                     <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>
                       <CheckCircle2 size={16} color="var(--color-text-dim)" /> {f}
                     </li>
@@ -603,7 +708,7 @@ function App() {
 
         {/* ===== FAQ ===== */}
         <section id="faq" style={{ padding: 'var(--space-4xl) 0' }}>
-          <div className="section-container">
+          <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="section-header">
               <h2 className="section-title">Perguntas <span className="text-gradient">Frequentes</span></h2>
               <p className="section-subtitle">Tire suas dúvidas sobre nossas soluções de IA.</p>
@@ -623,7 +728,7 @@ function App() {
         {/* ===== CTA FINAL ===== */}
         <section className="cta-section" style={{ margin: '0 var(--space-xl) var(--space-3xl)', borderRadius: 'var(--radius-2xl)', background: 'linear-gradient(135deg, rgba(0,240,255,0.06) 0%, rgba(123,44,191,0.06) 100%)', border: '1px solid var(--color-border)' }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} style={{ position: 'relative', zIndex: 1 }}>
-            <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)' }}>
+            <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)', display: 'inline-flex' }}>
               <Shield size={14} /> COMECE AGORA
             </div>
             <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', marginBottom: 'var(--space-md)', maxWidth: '700px', margin: '0 auto var(--space-md)' }}>
@@ -646,9 +751,8 @@ function App() {
 
       {/* ===== FOOTER ===== */}
       <footer style={{ borderTop: '1px solid var(--color-border)', padding: 'var(--space-3xl) var(--space-xl) var(--space-xl)', background: 'var(--color-bg-darker)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-2xl)', marginBottom: 'var(--space-2xl)' }}>
-            {/* Brand */}
             <div>
               <div style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: 'var(--font-heading)', marginBottom: 'var(--space-md)' }}>
                 Ai<span className="text-gradient">Prospera</span>
@@ -658,12 +762,11 @@ function App() {
               </p>
             </div>
 
-            {/* Soluções */}
             <div>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Soluções</h4>
+              <h4 style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Soluções</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
                 {['Automação WhatsApp', 'Chatbots IA', 'Agentes de Voz', 'IFinanças', 'AiProspera Drive'].map((item, i) => (
-                  <a key={i} href="#solucoes" style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s', padding: '2px 0' }}
+                  <a key={i} href="#solucoes" style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s' }}
                     onMouseOver={e => (e.currentTarget.style.color = 'var(--color-primary)')}
                     onMouseOut={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
                   >{item}</a>
@@ -671,12 +774,11 @@ function App() {
               </div>
             </div>
 
-            {/* Empresa */}
             <div>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Empresa</h4>
+              <h4 style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Empresa</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
                 {['Sobre nós', 'Planos', 'Blog', 'Política de Privacidade', 'Termos de Uso'].map((item, i) => (
-                  <a key={i} href="#" style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s', padding: '2px 0' }}
+                  <a key={i} href="#" style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s' }}
                     onMouseOver={e => (e.currentTarget.style.color = 'var(--color-primary)')}
                     onMouseOut={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
                   >{item}</a>
@@ -684,18 +786,17 @@ function App() {
               </div>
             </div>
 
-            {/* Contato */}
             <div>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Contato</h4>
+              <h4 style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Contato</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
-                  <Mail size={16} /> contato@aiprospera.com.br
+                  <Mail size={15} /> contato@aiprospera.com.br
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
-                  <Phone size={16} /> (11) 9xxxx-xxxx
+                  <Phone size={15} /> (11) 9xxxx-xxxx
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
-                  <MapPin size={16} /> São Paulo, SP
+                  <MapPin size={15} /> São Paulo, SP
                 </div>
                 <div style={{ display: 'flex', gap: 'var(--space-md)', marginTop: 'var(--space-sm)' }}>
                   <a href="#" style={{ color: 'var(--color-text-dim)', transition: 'color 0.2s' }} onMouseOver={e => (e.currentTarget.style.color = 'var(--color-primary)')} onMouseOut={e => (e.currentTarget.style.color = 'var(--color-text-dim)')} aria-label="LinkedIn">
@@ -709,17 +810,28 @@ function App() {
             </div>
           </div>
 
-          {/* Bottom bar */}
           <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-lg)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--space-md)' }}>
             <p style={{ color: 'var(--color-text-dim)', fontSize: '0.85rem' }}>
               &copy; {new Date().getFullYear()} AiProspera - Soluções. Todos os direitos reservados.
             </p>
             <p style={{ color: 'var(--color-text-dim)', fontSize: '0.8rem' }}>
-              Feito com IA 🤖 para humanos incríveis
+              Feito com IA para humanos incríveis
             </p>
           </div>
         </div>
       </footer>
+
+      {/* Esconde as colunas laterais do hero em mobile */}
+      <style>{`
+        @media (max-width: 1023px) {
+          .hero-side-cards { display: none !important; }
+        }
+        @media (max-width: 1023px) {
+          section > div[style*="grid-template-columns: 1fr 2fr 1fr"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
