@@ -1,8 +1,38 @@
-
+import { useState, useEffect } from 'react';
 import { Bot, Zap, ArrowRight, Activity, Car, Users, CheckCircle2, MessageSquare, PhoneCall } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      badge: "A revolução da automação corporativa",
+      title1: "Funcionários Digitais",
+      title2: "Trabalhando 24/7",
+      desc: "Escale suas operações, melhore seu atendimento e recupere ativos sem aumentar seu time. A inteligência artificial da AiProspera cuida do trabalho duro."
+    },
+    {
+      badge: "IFinanças",
+      title1: "Seu Fluxo de Caixa",
+      title2: "Sempre Blindado",
+      desc: "Recuperação de crédito amigável via WhatsApp combinada com análise preditiva. Inteligência no controle financeiro do seu negócio."
+    },
+    {
+      badge: "AiProspera Drive e Conecta",
+      title1: "Ecossistema Completo",
+      title2: "Para Seu Crescimento",
+      desc: "Desde o match perfeito de prestadores de serviço com clientes até o rastreamento logístico contínuo em tempo real."
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5500); 
+    return () => clearInterval(timer);
+  }, []);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -14,15 +44,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
       {/* Background glow effects */}
-      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 z-[-1] pointer-events-none">
         <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(0,240,255,0.08) 0%, rgba(10,10,12,0) 70%)', filter: 'blur(60px)' }}></div>
         <div style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(123,44,191,0.08) 0%, rgba(10,10,12,0) 70%)', filter: 'blur(60px)' }}></div>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(0,240,255,0.03) 0%, rgba(10,10,12,0) 70%)', filter: 'blur(80px)' }}></div>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(0,240,255,0.02) 0%, rgba(10,10,12,0) 70%)', filter: 'blur(80px)' }}></div>
       </div>
 
-      <header style={{ padding: '1.25rem 2rem', position: 'fixed', top: 0, width: '100%', zIndex: 50, borderBottom: '1px solid rgba(255,255,255,0.05)' }} className="glass-panel">
+      <header style={{ padding: '1rem 2rem', position: 'fixed', top: 0, width: '100%', zIndex: 50, borderBottom: '1px solid rgba(255,255,255,0.05)' }} className="glass-panel">
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: 'var(--font-heading)' }}>
             Ai<span className="text-gradient">Prospera</span>
@@ -32,42 +62,78 @@ function App() {
             <a href="#ecossistema" style={{ color: 'var(--color-text-main)', fontSize: '0.95rem', fontWeight: 500, opacity: 0.8, transition: 'opacity 0.2s' }} onMouseOver={e => e.currentTarget.style.opacity = '1'} onMouseOut={e => e.currentTarget.style.opacity = '0.8'}>O Ecossistema</a>
             <a href="#planos" style={{ color: 'var(--color-text-main)', fontSize: '0.95rem', fontWeight: 500, opacity: 0.8, transition: 'opacity 0.2s' }} onMouseOver={e => e.currentTarget.style.opacity = '1'} onMouseOut={e => e.currentTarget.style.opacity = '0.8'}>Planos</a>
           </nav>
-          <button className="btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem' }}>
+          <button className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.95rem' }}>
             Fale com a IA
           </button>
         </div>
       </header>
 
-      <main style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
-        {/* HERO SECTION */}
-        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '6rem 2rem', textAlign: 'center', minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
-            <motion.div variants={fadeInUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0, 240, 255, 0.08)', border: '1px solid rgba(0, 240, 255, 0.2)', padding: '0.5rem 1.25rem', borderRadius: '2rem', marginBottom: '2.5rem', color: 'var(--color-primary)', fontSize: '0.9rem', fontWeight: 500 }}>
-              <Zap size={16} /> <span>A revolução da automação corporativa chegou</span>
-            </motion.div>
-            <motion.h1 variants={fadeInUp} style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', lineHeight: '1.1', marginBottom: '1.5rem', maxWidth: '1000px', margin: '0 auto' }}>
-              Funcionários Digitais <br />
-              <span className="text-gradient">Trabalhando 24/7</span>
-            </motion.h1>
-            <motion.p variants={fadeInUp} style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', color: 'var(--color-text-muted)', maxWidth: '750px', margin: '2rem auto 3.5rem', lineHeight: '1.6' }}>
-              Escale suas operações, melhore seu atendimento e recupere ativos sem aumentar seu time. A inteligência artificial da AiProspera cuida do trabalho duro para você focar no estratégico.
-            </motion.p>
-            <motion.div variants={fadeInUp} style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <button className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
-                Conheça as Soluções <ArrowRight size={20} />
-              </button>
-              <button style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '9999px', color: 'white', cursor: 'pointer', transition: 'background 0.3s' }} className="glass-panel" onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                Ver Planos
-              </button>
-            </motion.div>
+      <main style={{ paddingTop: '6rem', paddingBottom: '2rem' }}>
+        {/* HERO SECTION WITH CAROUSEL */}
+        {/* Padding reduzido para puxar a seção seguinte para cima e a tela inicial mostrar mais conteúdo */}
+        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 0', textAlign: 'center', minHeight: '55vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          
+          <div style={{ position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto', height: '320px', display: 'flex', justifyContent: 'center' }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                style={{ position: 'absolute', width: '100%' }}
+              >
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0, 240, 255, 0.08)', border: '1px solid rgba(0, 240, 255, 0.2)', padding: '0.5rem 1.25rem', borderRadius: '2rem', marginBottom: '1.5rem', color: 'var(--color-primary)', fontSize: '0.9rem', fontWeight: 500 }}>
+                  <Zap size={16} /> <span>{heroSlides[currentSlide].badge}</span>
+                </div>
+                
+                <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', lineHeight: '1.1', marginBottom: '1rem', width: '100%' }}>
+                  {heroSlides[currentSlide].title1} <br />
+                  <span className="text-gradient">{heroSlides[currentSlide].title2}</span>
+                </h1>
+                
+                <p style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)', color: 'var(--color-text-muted)', maxWidth: '750px', margin: '1rem auto 0', lineHeight: '1.6' }}>
+                  {heroSlides[currentSlide].desc}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', margin: '0 0 2rem' }}>
+            {heroSlides.map((_, i) => (
+              <button 
+                key={i} 
+                onClick={() => setCurrentSlide(i)}
+                style={{ 
+                  width: i === currentSlide ? '32px' : '8px', 
+                  height: '8px', 
+                  borderRadius: '4px', 
+                  background: i === currentSlide ? 'var(--color-primary)' : 'rgba(255,255,255,0.2)', 
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
+                  cursor: 'pointer', 
+                  border: 'none',
+                  padding: 0
+                }}
+                aria-label={`Ir para slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+              Conheça as Soluções <ArrowRight size={20} />
+            </button>
+            <button style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '9999px', color: 'white', cursor: 'pointer', transition: 'background 0.3s' }} className="glass-panel" onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
+              Ver Planos
+            </button>
           </motion.div>
         </section>
 
         {/* SOLUÇÕES BASE */}
-        <section id="solucoes" style={{ maxWidth: '1200px', margin: '0 auto', padding: '6rem 2rem' }}>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+        <section id="solucoes" style={{ maxWidth: '1200px', margin: '1rem auto 0', padding: '2rem 2rem 5rem' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeInUp}>
             <h2 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '1rem' }}>Sua Operação em <span className="text-gradient">Piloto Automático</span></h2>
-            <p style={{ textAlign: 'center', color: 'var(--color-text-muted)', marginBottom: '4rem', fontSize: '1.1rem' }}>Canais de atendimento imersivos alimentados por LLMs super-especializados.</p>
+            <p style={{ textAlign: 'center', color: 'var(--color-text-muted)', marginBottom: '3rem', fontSize: '1.1rem' }}>Canais de atendimento imersivos alimentados por LLMs super-especializados.</p>
           </motion.div>
 
           <motion.div 
@@ -91,7 +157,7 @@ function App() {
         </section>
 
         {/* ECOSSISTEMA */}
-        <section id="ecossistema" style={{ padding: '6rem 2rem', position: 'relative' }}>
+        <section id="ecossistema" style={{ padding: '5rem 2rem', position: 'relative' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(180deg, rgba(10,10,12,0) 0%, rgba(0,240,255,0.03) 50%, rgba(10,10,12,0) 100%)', zIndex: -1 }}></div>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
@@ -118,7 +184,6 @@ function App() {
                 </div>
                 <div style={{ flex: '1 1 400px', background: 'rgba(0,0,0,0.3)', minHeight: '300px', borderLeft: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', position: 'relative' }}>
                   <div style={{ position: 'absolute', width: '200px', height: '200px', background: 'var(--color-primary)', filter: 'blur(100px)', opacity: 0.15 }}></div>
-                  {/* Mock dashboard gráfico abstrato poderia entrar aqui */}
                   <Activity size={120} color="var(--color-border)" style={{ opacity: 0.3 }} />
                 </div>
               </motion.div>
@@ -142,7 +207,7 @@ function App() {
         </section>
 
         {/* PRICING */}
-        <section id="planos" style={{ maxWidth: '1200px', margin: '0 auto', padding: '6rem 2rem' }}>
+        <section id="planos" style={{ maxWidth: '1200px', margin: '0 auto', padding: '5rem 2rem 6rem' }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Planos que Crescem <span className="text-gradient">Com Você</span></h2>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>Comece pequeno, ou vá all-in na automação corporativa.</p>
