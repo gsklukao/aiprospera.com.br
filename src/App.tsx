@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   Bot, Zap, ArrowRight, Activity, Car, Users, CheckCircle2,
-  MessageSquare, PhoneCall, ChevronDown, X,
+  MessageSquare, PhoneCall, ChevronDown, X, Moon, Sun,
   Search, Cpu, Rocket, BarChart3, Shield,
   Linkedin, Instagram, Mail, MapPin, Phone
 } from 'lucide-react';
@@ -79,29 +79,6 @@ const scaleIn = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
 };
 
-/* ============================
-   Stat Mini Card (hero lateral)
-   ============================ */
-function HeroStatCard({ icon, label, value, subtext, accentColor, barGradient }: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  subtext: string;
-  accentColor: string;
-  barGradient: string;
-}) {
-  return (
-    <div className="glass-panel" style={{ borderRadius: 'var(--radius-xl)', padding: 'var(--space-lg)', borderColor: `rgba(${accentColor}, 0.15)` }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-sm)' }}>
-        {icon}
-        <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</span>
-      </div>
-      <p style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--color-text-main)', lineHeight: 1 }}>{value}</p>
-      <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>{subtext}</p>
-      <div style={{ marginTop: '0.75rem', height: '3px', borderRadius: '2px', background: barGradient }} />
-    </div>
-  );
-}
 
 /* ============================
    FAQ Item Component
@@ -150,6 +127,10 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    // Inicializa com o localStorage, ou 'dark' padrão
+    return (localStorage.getItem('ui-theme') as 'dark' | 'light') || 'dark';
+  });
 
   const counter1 = useCountUp(500, 2000);
   const counter2 = useCountUp(98, 2000);
@@ -183,6 +164,14 @@ function App() {
     }, 5500);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    // Aplicar atributo tema no HTML / local storage
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('ui-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((prev: 'dark' | 'light') => prev === 'dark' ? 'light' : 'dark');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -237,6 +226,13 @@ function App() {
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
+            <button 
+              onClick={toggleTheme} 
+              aria-label="Alternar tema" 
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', padding: '0.4rem' }}
+            >
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <button className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', display: 'none' }} id="nav-cta-desktop">
               Fale com a IA
             </button>
@@ -303,59 +299,22 @@ function App() {
         {/* ===== HERO =====
             92vh → a seção de métricas abaixo aparece ~8vh na dobra
         */}
-        <section style={{ position: 'relative', minHeight: '92vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+        <section style={{ position: 'relative', minHeight: '92vh', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingBottom: 'var(--space-4xl)' }}>
           <div className="hero-grid-bg" />
 
-          {/* Wrapper 3 colunas: card esq | texto central | card dir */}
+          {/* Wrapper Centralizado */}
           <div style={{
             width: '100%',
-            maxWidth: '1400px',
+            maxWidth: '1000px',
             margin: '0 auto',
-            padding: 'var(--space-xl) var(--space-xl) var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 2fr 1fr',
-            gap: 'var(--space-xl)',
+            padding: 'var(--space-2xl) var(--space-xl)',
             alignItems: 'center',
             position: 'relative',
             zIndex: 1,
           }}>
 
-            {/* Coluna Esquerda */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}
-              className="hero-side-cards"
-            >
-              <HeroStatCard
-                icon={<MessageSquare size={15} color="var(--color-primary)" />}
-                label="WhatsApp IA"
-                value="50k+"
-                subtext="mensagens atendidas/mês"
-                accentColor="0,240,255"
-                barGradient="linear-gradient(90deg, var(--color-primary), transparent)"
-              />
-              <HeroStatCard
-                icon={<Activity size={15} color="#b56dfc" />}
-                label="Uptime"
-                value="99.9%"
-                subtext="disponibilidade garantida"
-                accentColor="123,44,191"
-                barGradient="linear-gradient(90deg, #7b2cbf, transparent)"
-              />
-              <HeroStatCard
-                icon={<CheckCircle2 size={15} color="var(--color-success)" />}
-                label="Satisfação"
-                value="98%"
-                subtext="dos clientes aprovam"
-                accentColor="34,197,94"
-                barGradient="linear-gradient(90deg, var(--color-success), transparent)"
-              />
-            </motion.div>
-
             {/* Coluna Central — texto */}
-            <div style={{ textAlign: 'center', padding: '0 var(--space-md)' }}>
+            <div style={{ textAlign: 'center' }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -368,19 +327,19 @@ function App() {
                     <Zap size={14} /> <span>{heroSlides[currentSlide].badge}</span>
                   </div>
 
-                  <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 4rem)', lineHeight: 1.05, marginBottom: 'var(--space-lg)' }}>
+                  <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', lineHeight: 1.05, marginBottom: 'var(--space-lg)' }}>
                     {heroSlides[currentSlide].title1} <br />
                     <span className="text-gradient">{heroSlides[currentSlide].title2}</span>
                   </h1>
 
-                  <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', color: 'var(--color-text-muted)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.8 }}>
+                  <p style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)', color: 'var(--color-text-muted)', maxWidth: '750px', margin: '0 auto', lineHeight: 1.75 }}>
                     {heroSlides[currentSlide].desc}
                   </p>
                 </motion.div>
               </AnimatePresence>
 
               {/* Indicadores */}
-              <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', margin: 'var(--space-xl) 0 var(--space-lg)' }}>
+              <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', margin: 'var(--space-2xl) 0 var(--space-lg)' }}>
                 {heroSlides.map((_, i) => (
                   <button
                     key={i}
@@ -408,56 +367,14 @@ function App() {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}
               >
-                <a href="#solucoes" className="btn-primary" style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}>
+                <a href="#solucoes" className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
                   Conheça as Soluções <ArrowRight size={18} />
                 </a>
-                <a href="#planos" className="btn-secondary" style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}>
+                <a href="#planos" className="btn-secondary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
                   Ver Planos
                 </a>
               </motion.div>
             </div>
-
-            {/* Coluna Direita */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}
-              className="hero-side-cards"
-            >
-              {/* Card: Chatbot em ação */}
-              <div className="glass-panel" style={{ borderRadius: 'var(--radius-xl)', padding: 'var(--space-lg)', borderColor: 'rgba(0,180,216,0.15)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-sm)' }}>
-                  <Bot size={15} color="var(--color-accent)" />
-                  <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Chatbot IA</span>
-                </div>
-                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-main)', lineHeight: 1.55, fontStyle: 'italic' }}>
-                  "Seu pedido #4821 está a caminho! Previsão: 14h."
-                </p>
-                <div style={{ marginTop: 'var(--space-sm)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--color-success)', boxShadow: '0 0 6px rgba(34,197,94,0.8)' }} />
-                  <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Respondido em 0.3s</span>
-                </div>
-              </div>
-
-              <HeroStatCard
-                icon={<PhoneCall size={15} color="var(--color-primary)" />}
-                label="IFinanças"
-                value="R$127K"
-                subtext="recuperados este mês"
-                accentColor="0,240,255"
-                barGradient="linear-gradient(90deg, var(--color-primary), var(--color-secondary))"
-              />
-
-              <HeroStatCard
-                icon={<Users size={15} color="#b56dfc" />}
-                label="Clientes"
-                value="500+"
-                subtext="empresas automatizadas"
-                accentColor="123,44,191"
-                barGradient="linear-gradient(90deg, #7b2cbf, transparent)"
-              />
-            </motion.div>
 
           </div>
 
@@ -466,14 +383,14 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            style={{ position: 'absolute', bottom: '1.25rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}
+            style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}
           >
-            <span style={{ fontSize: '0.65rem', color: 'var(--color-text-dim)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Scroll</span>
+            <span style={{ fontSize: '0.7rem', color: 'var(--color-text-dim)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Scroll</span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
-              <ChevronDown size={18} color="var(--color-text-dim)" />
+              <ChevronDown size={20} color="var(--color-text-dim)" />
             </motion.div>
           </motion.div>
         </section>

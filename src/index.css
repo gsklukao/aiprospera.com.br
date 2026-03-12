@@ -59,6 +59,32 @@
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* === Light Theme Overrides === */
+[data-theme="light"] {
+  --color-bg-dark: #f3f4f6;
+  --color-bg-darker: #e5e7eb;
+  --color-bg-glass: rgba(255, 255, 255, 0.75);
+  --color-bg-glass-hover: rgba(255, 255, 255, 0.95);
+  --color-bg-card: rgba(255, 255, 255, 0.85);
+  
+  --color-primary: #0077b6;
+  --color-primary-dim: rgba(0, 119, 182, 0.12);
+  --color-secondary: #7209b7;
+  --color-secondary-dim: rgba(114, 9, 183, 0.12);
+  --color-accent: #023e8a;
+  
+  --color-text-main: #111827;
+  --color-text-muted: #4b5563;
+  --color-text-dim: #9ca3af;
+  
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-hover: rgba(0, 119, 182, 0.25);
+  --color-success: #059669;
+
+  --shadow-glow-primary: 0 0 20px rgba(0, 119, 182, 0.15);
+  --shadow-glow-secondary: 0 0 20px rgba(114, 9, 183, 0.15);
+}
+
 /* === Global Reset === */
 *,
 *::before,
