@@ -186,7 +186,8 @@ export default function Layout() {
                   { name: 'Planos', to: isHome ? '#planos' : '/#planos' },
                   { name: 'Blog', to: '/' },
                   { name: 'Política de Privacidade', to: '/politica-de-privacidade' },
-                  { name: 'Termos de Uso', to: '/termos-de-uso' }
+                  { name: 'Termos de Uso', to: '/termos-de-uso' },
+                  { name: 'Exclusão de Dados', to: '/exclusao-de-dados' }
                 ].map((item, i) => (
                   item.to.startsWith('#') || (isHome && item.to.includes('#')) ? (
                     <a key={i} href={item.to} style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s' }}
