@@ -348,7 +348,7 @@ function App() {
                       width: i === currentSlide ? '28px' : '8px',
                       height: '8px',
                       borderRadius: '4px',
-                      background: i === currentSlide ? 'var(--color-primary)' : 'rgba(255,255,255,0.15)',
+                      background: i === currentSlide ? 'var(--color-primary)' : 'var(--color-slider-dot)',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       cursor: 'pointer',
                       border: 'none',
@@ -452,7 +452,7 @@ function App() {
             >
               {[
                 { icon: <MessageSquare size={28} color="var(--color-primary)" />, title: 'Automação de WhatsApp', desc: 'Atenda clientes, qualifique leads e venda automaticamente de forma natural e humanizada no principal canal de comunicação.', boxClass: '' },
-                { icon: <Bot size={28} color="#b56dfc" />, title: 'Chatbots de Alta Conversão', desc: 'Esqueça as árvores de botões rígidas. Nossos chatbots compreendem a intenção real e mantém conversas fluídas 24h por dia.', boxClass: 'icon-box-secondary' },
+                { icon: <Bot size={28} color="var(--color-secondary-light)" />, title: 'Chatbots de Alta Conversão', desc: 'Esqueça as árvores de botões rígidas. Nossos chatbots compreendem a intenção real e mantém conversas fluídas 24h por dia.', boxClass: 'icon-box-secondary' },
                 { icon: <PhoneCall size={28} color="var(--color-accent)" />, title: 'Agentes de Voz via IA', desc: 'IA que atende o telefone da sua empresa, ouve o cliente, processa a demanda e resolve o problema sem fricção.', boxClass: '' }
               ].map((item, i) => (
                 <motion.div key={i} variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
@@ -490,13 +490,13 @@ function App() {
                   </p>
                   <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {['Recuperação de Crédito amigável', 'Previsibilidade de Fluxo de Caixa', 'Integração contábil automatizada'].map((f, i) => (
-                      <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#e0e0e5' }}>
+                      <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--color-text-muted)' }}>
                         <CheckCircle2 size={18} color="var(--color-primary)" /> {f}
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div style={{ flex: '1 1 350px', background: 'rgba(0,0,0,0.25)', minHeight: '280px', borderLeft: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ flex: '1 1 350px', background: 'var(--color-bg-darker)', minHeight: '280px', borderLeft: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', width: '180px', height: '180px', background: 'var(--color-primary)', filter: 'blur(100px)', opacity: 0.12 }} />
                   <Activity size={100} color="var(--color-border)" style={{ opacity: 0.25 }} />
                 </div>
@@ -505,7 +505,7 @@ function App() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'var(--space-xl)' }}>
                 <motion.div variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
                   <div className="icon-box-secondary" style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-lg)' }}>
-                    <Car size={28} color="#b56dfc" />
+                    <Car size={28} color="var(--color-secondary-light)" />
                   </div>
                   <h3 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>AiProspera Drive</h3>
                   <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>A inteligência por trás do rastreamento logístico contínuo e gestão documental de frotas através do WhatsApp.</p>
@@ -586,7 +586,7 @@ function App() {
               </motion.div>
 
               <motion.div variants={fadeInUp} className="glass-card" style={{ padding: 'calc(var(--space-2xl) + 0.5rem) var(--space-2xl)', position: 'relative', border: '1px solid rgba(0,240,255,0.3)', background: 'linear-gradient(180deg, rgba(0,240,255,0.04) 0%, var(--color-bg-glass) 100%)', transform: 'scale(1.03)', boxShadow: 'var(--shadow-glow-primary)' }}>
-                <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))', color: '#000', padding: '0.25rem 1rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
+                <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))', color: 'var(--color-btn-text)', padding: '0.25rem 1rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
                   MAIS POPULAR
                 </div>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-xs)' }}>Pro</h3>
