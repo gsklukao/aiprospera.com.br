@@ -55,8 +55,16 @@ const faqData = [
     a: "Sim. Utilizamos criptografia de ponta a ponta, servidores seguros com certificações de segurança, e estamos em conformidade com a LGPD. Seus dados e de seus clientes estão blindados."
   },
   {
-    q: "Posso testar antes de assinar?",
-    a: "Sim! Oferecemos uma demonstração gratuita personalizada para que você veja a IA operando com dados e cenários reais do seu negócio antes de tomar qualquer decisão."
+    q: "Quais são os custos além da assinatura mensal?",
+    a: "Para algumas automações, pode haver custos de terceiros (como OpenAI API ou Evolution API). Porém, na nossa consultoria VIP, ajudamos você a otimizar esses custos para manter sua margem de lucro alta."
+  },
+  {
+    q: "Os workflows do catálogo são fáceis de instalar?",
+    a: "Sim! Todos os nossos workflows acompanham um guia de instalação passo a passo. Além disso, oferecemos suporte técnico para garantir que tudo esteja rodando perfeitamente no seu n8n."
+  },
+  {
+    q: "Posso solicitar uma automação personalizada?",
+    a: "Com certeza! Se não encontrou o que precisava no catálogo, nosso time pode desenvolver uma solução exclusiva sob medida para as necessidades específicas da sua empresa."
   }
 ];
 
@@ -414,6 +422,52 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* ===== CATÁLOGO PREVIEW ===== */}
+      <section id="catalogo" style={{ padding: 'var(--space-4xl) 0', background: 'var(--color-bg-darker)' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="section-header">
+            <div className="badge-pill" style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}>
+              PRODUTOS EM DESTAQUE
+            </div>
+            <h2 className="section-title">Nossos <span className="text-gradient">Workflows</span> Populares</h2>
+            <p className="section-subtitle">Conheça as ferramentas prontas para impulsionar seu faturamento.</p>
+          </motion.div>
+
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+            gap: 'var(--space-xl)',
+            marginBottom: 'var(--space-3xl)'
+          }}>
+            {[
+              { title: 'YouTube Automático Pro', category: 'Workflow', price: '147,00', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800' },
+              { title: 'Shopee Affiliate Bot', category: 'Afiliados', price: '97,90', img: 'https://images.unsplash.com/photo-1620912189865-1e8a33da4c5e?auto=format&fit=crop&q=80&w=800' },
+              { title: 'Agente de Voz IA', category: 'Agente IA', price: '197,00', img: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=800' }
+            ].map((prod, i) => (
+              <motion.div key={i} variants={fadeInUp} className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+                <div style={{ height: '180px', overflow: 'hidden' }}>
+                  <img src={prod.img} alt={prod.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <div style={{ padding: '1.5rem' }}>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--color-primary)', fontWeight: 600 }}>{prod.category.toUpperCase()}</span>
+                  <h3 style={{ fontSize: '1.2rem', margin: '0.5rem 0' }}>{prod.title}</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem' }}>
+                    <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>R$ {prod.price}</span>
+                    <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}>Ver Mais</button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <a href="/#/catalogo" className="btn-secondary" style={{ padding: '1rem 3rem' }}>
+              Ver Catálogo Completo <ArrowRight size={18} />
+            </a>
+          </div>
         </div>
       </section>
 

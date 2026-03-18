@@ -103,6 +103,37 @@ const SAMPLE_PRODUCTS = [
     badge: 'Hot',
     salesCount: 198,
     rating: 5
+  },
+  {
+    id: '10',
+    title: 'Pinterest Affiliate Manager',
+    description: 'Automação para criação de pins e postagem programada. Tráfego orgânico massivo para seus links.',
+    price: 67.00,
+    image: 'https://images.unsplash.com/photo-1611162616475-46b635cbca44?auto=format&fit=crop&q=80&w=800',
+    category: 'Afiliados',
+    salesCount: 154,
+    rating: 4
+  },
+  {
+    id: '11',
+    title: 'IA Copywriter Profissional',
+    description: 'Script de n8n que gera copies de alta conversão baseadas nos maiores players do mercado.',
+    price: 27.00,
+    image: 'https://images.unsplash.com/photo-1455391727115-1a654bb362bf?auto=format&fit=crop&q=80&w=800',
+    category: 'Recursos',
+    salesCount: 432,
+    rating: 5
+  },
+  {
+    id: '12',
+    title: 'Sistema de Recuperação de Carrinho',
+    description: 'Agente de IA que entra em contato via WhatsApp com clientes que abandonaram o checkout.',
+    price: 157.00,
+    image: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&q=80&w=800',
+    category: 'Automação',
+    badge: 'ROI Alto',
+    salesCount: 211,
+    rating: 5
   }
 ];
 
