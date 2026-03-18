@@ -40,6 +40,7 @@ export default function Layout() {
   }, [location.pathname]);
 
   const navLinks = [
+    { label: 'Catálogo', href: isHome ? '#catalogo' : '/#/catalogo' },
     { label: 'Soluções', href: isHome ? '#solucoes' : '/#solucoes' },
     { label: 'Ecossistema', href: isHome ? '#ecossistema' : '/#ecossistema' },
     { label: 'Como Funciona', href: isHome ? '#como-funciona' : '/#como-funciona' },

@@ -4,6 +4,7 @@ import Home from './pages/Home.tsx';
 import PoliticasPrivacidade from './pages/PoliticasPrivacidade.tsx';
 import TermosUso from './pages/TermosUso.tsx';
 import ExclusaoDados from './pages/ExclusaoDados.tsx';
+import Catalog from './pages/Catalog';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="politica-de-privacidade" element={<PoliticasPrivacidade />} />
           <Route path="termos-de-uso" element={<TermosUso />} />
           <Route path="exclusao-de-dados" element={<ExclusaoDados />} />
+          <Route path="catalogo" element={<Catalog />} />
         </Route>
       </Routes>
     </HashRouter>
