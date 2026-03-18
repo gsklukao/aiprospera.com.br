@@ -4,74 +4,109 @@ import { Search, Filter, ArrowUpDown } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
 // Sample Data
+// Full Product Data
 const SAMPLE_PRODUCTS = [
   {
     id: '1',
-    title: 'Automação Shopee Affiliate',
-    description: 'Sistema completo para coletar ofertas e distribuir no WhatsApp automaticamente com IA.',
-    price: 97.90,
-    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80&w=800',
+    title: 'YouTube Automático Pro',
+    description: 'Crie e gerencie canais dark no YouTube 100% com IA e n8n. Automação de roteiro, voz e edição.',
+    price: 147.00,
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800',
     category: 'Workflow',
     badge: 'Mais Vendido',
-    salesCount: 128,
+    salesCount: 342,
     rating: 5
   },
   {
     id: '2',
-    title: 'Consultoria n8n (Expert)',
-    description: '2 horas de mentoria dedicada para destravar seus fluxos e automações complexas.',
-    price: 249.90,
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
-    category: 'Consultoria',
-    badge: 'Popular',
-    salesCount: 45,
+    title: 'Shopee Affiliate Bot',
+    description: 'O melhor bot do mercado para faturamento no automático. Coleta ofertas e envia para WhatsApp e Telegram.',
+    price: 97.90,
+    image: 'https://images.unsplash.com/photo-1620912189865-1e8a33da4c5e?auto=format&fit=crop&q=80&w=800',
+    category: 'Afiliados',
+    badge: 'Elite',
+    salesCount: 856,
     rating: 5
   },
   {
     id: '3',
-    title: 'Agente de IA Evolution',
-    description: 'Transforme seu WhatsApp em uma máquina de vendas com integração ChatGPT e Evolution API.',
-    price: 147.00,
-    image: 'https://images.unsplash.com/photo-1675557009875-436f09789452?auto=format&fit=crop&q=80&w=800',
-    category: 'Agente IA',
-    badge: 'Novo',
-    salesCount: 32,
-    rating: 4
+    title: 'Amazon & Magalu Flow',
+    description: 'Sistema dual-platform para curadoria de promoções. Monitore ofertas quentes em tempo real.',
+    price: 89.90,
+    image: 'https://images.unsplash.com/photo-1523474253046-2cd2c78a0dbb?auto=format&fit=crop&q=80&w=800',
+    category: 'Afiliados',
+    badge: 'Popular',
+    salesCount: 412,
+    rating: 5
   },
   {
     id: '4',
-    title: 'Fluxo Afiliado Magalu',
-    description: 'Automação completa para curadoria e postagem de promoções Magazine Luiza.',
-    price: 89.90,
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
-    category: 'Workflow',
+    title: 'Agente de Voz IA (Voice)',
+    description: 'Assistente virtual para atendimento telefônico com voz humana ultrarrealista. Perfeito para vendas.',
+    price: 197.00,
+    image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=800',
+    category: 'Agente IA',
+    badge: 'Premium',
     salesCount: 89,
     rating: 5
   },
   {
     id: '5',
-    title: 'Pack de Prompts Avançados',
-    description: 'Mais de 500 prompts validados para marketing, vendas e automação de processos.',
-    price: 47.00,
-    image: 'https://images.unsplash.com/photo-1673187115862-d62e8965c71a?auto=format&fit=crop&q=80&w=800',
-    category: 'Recursos',
-    salesCount: 215,
-    rating: 5
+    title: 'WhatsApp Sales Intelligence',
+    description: 'Integração de agentes inteligentes que qualificam leads, respondem dúvidas e fecham vendas 24/7.',
+    price: 129.00,
+    image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&q=80&w=800',
+    category: 'Automação',
+    badge: 'Destaque',
+    salesCount: 156,
+    rating: 4
   },
   {
     id: '6',
-    title: 'Dashboard Financeiro IA',
-    description: 'Controle total dos seus ganhos de afiliados com visualização de dados dinâmica.',
-    price: 129.90,
+    title: 'Dashboard AiProspera Pro',
+    description: 'Visualização completa das suas métricas de afiliados e performance de automações em um só lugar.',
+    price: 47.00,
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
-    category: 'Dashboard',
-    badge: 'Premium',
-    salesCount: 67,
+    category: 'Gestão',
+    salesCount: 267,
+    rating: 5
+  },
+  {
+    id: '7',
+    title: 'Consultoria Estratégica VIP',
+    description: 'Mentoria individual focada em escala e implementação de processos robustos de automação n8n.',
+    price: 299.00,
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
+    category: 'Mentoria',
+    badge: 'Vagas Limitadas',
+    salesCount: 24,
+    rating: 5
+  },
+  {
+    id: '8',
+    title: 'Pack de Prompts Viral (AI)',
+    description: 'Biblioteca com mais de 1.000 prompts validados para gerar conteúdo viral e textos de alta conversão.',
+    price: 37.00,
+    image: 'https://images.unsplash.com/photo-1673187115862-d62e8965c71a?auto=format&fit=crop&q=80&w=800',
+    category: 'Recursos',
+    badge: 'Novo',
+    salesCount: 1245,
+    rating: 5
+  },
+  {
+    id: '9',
+    title: 'Mass TikTok/Reels Automation',
+    description: 'Sistema completo para criação e postagem em massa de vídeos curtos. Domine o algoritmo.',
+    price: 117.00,
+    image: 'https://images.unsplash.com/photo-1596558450255-7c0b7be9d56a?auto=format&fit=crop&q=80&w=800',
+    category: 'Social',
+    badge: 'Hot',
+    salesCount: 198,
     rating: 5
   }
 ];
 
-const CATEGORIES = ['Todos', 'Workflow', 'Consultoria', 'Agente IA', 'Recursos', 'Dashboard'];
+const CATEGORIES = ['Todos', 'Workflow', 'Afiliados', 'Agente IA', 'Automação', 'Gestão', 'Mentoria', 'Recursos', 'Social'];
 
 export default function Catalog() {
   const [searchTerm, setSearchTerm] = useState('');
