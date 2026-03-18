@@ -40,12 +40,12 @@ export default function Layout() {
   }, [location.pathname]);
 
   const navLinks = [
-    { label: 'Catálogo', href: isHome ? '#catalogo' : '/#/catalogo' },
-    { label: 'Soluções', href: isHome ? '#solucoes' : '/#solucoes' },
-    { label: 'Ecossistema', href: isHome ? '#ecossistema' : '/#ecossistema' },
-    { label: 'Como Funciona', href: isHome ? '#como-funciona' : '/#como-funciona' },
-    { label: 'Planos', href: isHome ? '#planos' : '/#planos' },
-    { label: 'FAQ', href: isHome ? '#faq' : '/#faq' },
+    { label: 'Catálogo', href: '#/catalogo' },
+    { label: 'Soluções', href: '#/solucoes' },
+    { label: 'Ecossistema', href: '#/ecossistema' },
+    { label: 'Como Funciona', href: '#/como-funciona' },
+    { label: 'Planos', href: '#/planos' },
+    { label: 'FAQ', href: '#/faq' },
   ];
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
@@ -171,7 +171,7 @@ export default function Layout() {
               <h4 style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-main)', marginBottom: 'var(--space-lg)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Soluções</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
                 {['Automação WhatsApp', 'Chatbots IA', 'Agentes de Voz', 'IFinanças', 'AiProspera Drive'].map((item, i) => (
-                  <a key={i} href={isHome ? '#solucoes' : '/#solucoes'} style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s' }}
+                  <a key={i} href="#/solucoes" style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', transition: 'color 0.2s' }}
                     onMouseOver={e => (e.currentTarget.style.color = 'var(--color-primary)')}
                     onMouseOut={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
                   >{item}</a>
@@ -184,7 +184,7 @@ export default function Layout() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
                 {[
                   { name: 'Sobre nós', to: '/' },
-                  { name: 'Planos', to: isHome ? '#planos' : '/#planos' },
+                  { name: 'Planos', to: '/planos' },
                   { name: 'Blog', to: '/' },
                   { name: 'Política de Privacidade', to: '/politica-de-privacidade' },
                   { name: 'Termos de Uso', to: '/termos-de-uso' },

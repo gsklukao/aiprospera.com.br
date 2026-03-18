@@ -5,6 +5,7 @@ import {
   Search, Cpu, Rocket, BarChart3, Shield
 } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 /* ============================
    Counter Animation Hook
@@ -136,6 +137,23 @@ export default function Home() {
   const counter2 = useCountUp(98, 2000);
   const counter3 = useCountUp(24, 1500);
   const counter4 = useCountUp(50, 2000);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Extrai o caminho sem a barra inicial
+    const path = location.pathname.substring(1);
+    
+    // Se o caminho corresponder a um ID de seção, faz o scroll
+    if (['ecossistema', 'solucoes', 'como-funciona', 'planos', 'faq', 'catalogo'].includes(path)) {
+      const element = document.getElementById(path);
+      if (element) {
+        // Pequeno delay para garantir que o componente foi montado e o layout estabilizado
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location.pathname]);
 
   const heroSlides = [
     {
