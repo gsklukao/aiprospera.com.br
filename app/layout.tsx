@@ -16,6 +16,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aiprospera.com.br"),
   title: "AiProspera | Funcionários Digitais com IA - Automação Inteligente",
   description: "Contrate um funcionário digital que trabalha 24h, não tira férias e reduz seus custos em até 90%. Automação inteligente via WhatsApp, chatbots e agentes de voz.",
   keywords: ["inteligência artificial", "automação", "WhatsApp", "chatbot", "IA", "atendimento automático", "funcionários digitais", "automação para PMEs", "agente de IA Brasil"],
