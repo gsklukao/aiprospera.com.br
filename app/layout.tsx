@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const inter = Inter({
   variable: "--font-body",
@@ -63,11 +64,39 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Como a IA da AiProspera se diferencia de chatbots comuns?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nossos agentes são alimentados por LLMs especializados que compreendem contexto, intenção e sentimento."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Quanto tempo leva para integrar as soluções ao meu negócio?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A integração básica via WhatsApp pode ser feita em 48h. Soluções mais complexas levam de 1 a 2 semanas."
+                  }
+                }
+              ]
+            }),
+          }}
+        />
       </head>
       <body>
         <Navbar />
         {children}
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

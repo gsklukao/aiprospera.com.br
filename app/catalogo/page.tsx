@@ -88,6 +88,29 @@ export default function CatalogPage() {
 
   return (
     <div style={{ paddingBottom: 'var(--space-4xl)' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": SAMPLE_PRODUCTS.map((p, i) => ({
+              "@type": "ListItem",
+              "position": i + 1,
+              "item": {
+                "@type": "Product",
+                "name": p.title,
+                "description": p.description,
+                "offers": {
+                  "@type": "Offer",
+                  "price": p.price,
+                  "priceCurrency": "BRL"
+                }
+              }
+            }))
+          })
+        }}
+      />
       <section style={{ 
         position: 'relative', 
         padding: 'var(--space-4xl) var(--space-xl)', 

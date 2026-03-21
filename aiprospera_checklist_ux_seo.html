@@ -1,0 +1,230 @@
+
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .wrap { padding: 1rem 0; font-family: var(--font-sans); }
+  .header { margin-bottom: 1.5rem; }
+  .header h2 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .header p { font-size: 13px; color: var(--color-text-secondary); margin: 0; }
+
+  .section { margin-bottom: 1.2rem; border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+  .section-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--color-background-secondary); cursor: pointer; user-select: none; }
+  .section-header:hover { background: var(--color-background-tertiary); }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+  .badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  .badge-red    { background: var(--color-background-danger);  color: var(--color-text-danger); }
+  .badge-amber  { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .badge-green  { background: var(--color-background-success); color: var(--color-text-success); }
+  .badge-blue   { background: var(--color-background-info);    color: var(--color-text-info); }
+  .chevron { font-size: 12px; color: var(--color-text-tertiary); transition: transform .2s; }
+  .chevron.open { transform: rotate(90deg); }
+
+  .items { display: none; padding: 8px 14px 12px; }
+  .items.open { display: block; }
+
+  .item { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--color-border-tertiary); cursor: pointer; }
+  .item:last-child { border-bottom: none; }
+  .item:hover .item-label { color: var(--color-text-primary); }
+  .checkbox { width: 16px; height: 16px; min-width: 16px; border: 1.5px solid var(--color-border-secondary); border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: all .15s; margin-top: 2px; }
+  .checkbox.checked { background: var(--color-text-info); border-color: var(--color-text-info); }
+  .checkbox.checked::after { content: ''; display: block; width: 9px; height: 6px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff; transform: rotate(-45deg) translateY(-1px); }
+  .item-label { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; flex: 1; }
+  .item-label.checked { color: var(--color-text-tertiary); text-decoration: line-through; }
+  .item-tag { font-size: 11px; padding: 1px 6px; border-radius: 4px; margin-top: 2px; white-space: nowrap; }
+  .tag-seo   { background: var(--color-background-info);    color: var(--color-text-info); }
+  .tag-ux    { background: var(--color-background-success); color: var(--color-text-success); }
+  .tag-copy  { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .tag-tech  { background: var(--color-background-danger);  color: var(--color-text-danger); }
+
+  .progress-bar-wrap { margin-top: 1.2rem; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 5px; }
+  .progress-bar { height: 6px; background: var(--color-border-tertiary); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--color-text-info); border-radius: 3px; transition: width .3s; }
+
+  .footer { margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
+  .btn { font-size: 12px; padding: 5px 12px; border-radius: 6px; border: 1px solid var(--color-border-secondary); background: var(--color-background-secondary); color: var(--color-text-secondary); cursor: pointer; }
+  .btn:hover { background: var(--color-background-tertiary); }
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <h2>Checklist: UX · Copy · SEO · Tech</h2>
+    <p>AiProspera — Landing Page para venda de LPs e Automação WhatsApp</p>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>Progresso geral</span>
+      <span id="progress-text">0 / 0 concluídos</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="footer">
+    <button class="btn" onclick="resetAll()">Resetar tudo</button>
+    <span id="score-text" style="font-size:12px;color:var(--color-text-tertiary)"></span>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {
+    id: "tech",
+    title: "Técnico & Performance",
+    badge: "Crítico",
+    badgeClass: "badge-red",
+    items: [
+      { id:"t1", label:"Migrar de SPA pura para Next.js com SSR ou Astro (HTML pré-renderizado chegando ao Google)", tags:["tech","seo"] },
+      { id:"t2", label:"Configurar OG Tags e meta description únicas para cada página (preview no WhatsApp e LinkedIn)", tags:["tech","seo"] },
+      { id:"t3", label:"LCP abaixo de 2.5s — hero deve carregar sem tela branca", tags:["tech","ux"] },
+      { id:"t4", label:"Lazy loading em imagens e vídeos — não carregar tudo de uma vez", tags:["tech"] },
+      { id:"t5", label:"Preload de fontes críticas no <head> para evitar FOUT (texto piscando)", tags:["tech"] },
+      { id:"t6", label:"HTTPS, domínio sem www vs com www padronizado, redirect 301 correto", tags:["tech","seo"] },
+      { id:"t7", label:"Sitemap.xml e robots.txt configurados e enviados ao Google Search Console", tags:["tech","seo"] },
+    ]
+  },
+  {
+    id: "seo",
+    title: "SEO On-Page",
+    badge: "Alta prioridade",
+    badgeClass: "badge-amber",
+    items: [
+      { id:"s1", label:"H1 único por página com palavra-chave principal (ex: 'Automação de atendimento WhatsApp para empresas')", tags:["seo"] },
+      { id:"s2", label:"Title tag com ≤60 chars e meta description com ≤155 chars por página", tags:["seo"] },
+      { id:"s3", label:"Schema Markup: Organization, FAQPage, Service — ajuda o Google a entender o negócio", tags:["seo"] },
+      { id:"s4", label:"Páginas separadas por produto: /landing-pages e /automacao-whatsapp", tags:["seo","ux"] },
+      { id:"s5", label:"Páginas por segmento: /para-imobiliarias, /para-clinicas, /para-ecommerce", tags:["seo"] },
+      { id:"s6", label:"Blog com conteúdo: 'como automatizar atendimento WhatsApp', 'o que é Landing Page que converte'", tags:["seo"] },
+      { id:"s7", label:"Links internos entre páginas de produto, segmento e blog", tags:["seo"] },
+      { id:"s8", label:"Velocidade medida pelo PageSpeed Insights — score acima de 80 no mobile", tags:["seo","tech"] },
+    ]
+  },
+  {
+    id: "ux",
+    title: "UX & Estrutura da Página",
+    badge: "Alta prioridade",
+    badgeClass: "badge-amber",
+    items: [
+      { id:"u1", label:"Hero: proposta de valor clara em 1 frase + subheadline com dor do cliente + CTA visível sem scroll", tags:["ux","copy"] },
+      { id:"u2", label:"Prova social logo após o hero (logos, número de clientes, avaliações)", tags:["ux"] },
+      { id:"u3", label:"Seção 'Como funciona' em 3 passos simples — sem jargão técnico", tags:["ux"] },
+      { id:"u4", label:"Demo real ou vídeo curto mostrando o produto funcionando (30 a 60 seg)", tags:["ux"] },
+      { id:"u5", label:"Separação visual clara entre os dois produtos: LP e Automação WhatsApp", tags:["ux"] },
+      { id:"u6", label:"FAQ com objeções reais de clientes (preço, tempo de entrega, suporte)", tags:["ux","copy"] },
+      { id:"u7", label:"CTA repetido em pelo menos 3 pontos da página — não só no topo", tags:["ux"] },
+      { id:"u8", label:"Mobile-first: testar o site no celular antes de qualquer publicação", tags:["ux"] },
+      { id:"u9", label:"Sem menu com muitos itens — foco total em conversão, não em navegação", tags:["ux"] },
+    ]
+  },
+  {
+    id: "copy",
+    title: "Copy & Proposta de Valor",
+    badge: "Alta prioridade",
+    badgeClass: "badge-amber",
+    items: [
+      { id:"c1", label:"Headline foca em resultado, não em tecnologia. Ex: 'Seu WhatsApp respondendo clientes 24h, sem contratar ninguém'", tags:["copy"] },
+      { id:"c2", label:"Subheadline cita a dor: tempo perdido, respostas atrasadas, clientes sem retorno", tags:["copy"] },
+      { id:"c3", label:"CTA específico: 'Ver demonstração', 'Falar com o agente agora' — não 'Saiba mais'", tags:["copy"] },
+      { id:"c4", label:"Depoimentos com métricas reais: 'reduziu 3h/dia de atendimento', 'aumentou conversão em 40%'", tags:["copy"] },
+      { id:"c5", label:"Diferenciar LP do concorrente com 1 parágrafo objetivo no topo da página de produto", tags:["copy"] },
+      { id:"c6", label:"Preços ou âncora de preço visível — 'a partir de R$X/mês' reduz fricção de contato", tags:["copy"] },
+      { id:"c7", label:"Urgência real no CTA quando possível: vagas limitadas, período de onboarding, etc.", tags:["copy"] },
+    ]
+  },
+  {
+    id: "whatsapp",
+    title: "Específico: Automação WhatsApp",
+    badge: "Produto",
+    badgeClass: "badge-blue",
+    items: [
+      { id:"w1", label:"Demo interativa: widget de chat no site simulando o agente respondendo em tempo real", tags:["ux"] },
+      { id:"w2", label:"Listar integrações suportadas (CRM, Google Agenda, planilhas, etc.)", tags:["copy","ux"] },
+      { id:"w3", label:"Explicar em que casos o humano assume o atendimento — tranquiliza clientes corporativos", tags:["copy"] },
+      { id:"w4", label:"Cases reais por segmento: clínica que usou, imobiliária, e-commerce", tags:["copy","seo"] },
+      { id:"w5", label:"Botão de WhatsApp flutuante no próprio site — converte melhor que formulário", tags:["ux"] },
+    ]
+  },
+  {
+    id: "lp",
+    title: "Específico: Criação de Landing Pages",
+    badge: "Produto",
+    badgeClass: "badge-blue",
+    items: [
+      { id:"l1", label:"Portfólio visível na página — exemplos reais de LPs entregues com print ou link", tags:["ux","copy"] },
+      { id:"l2", label:"Prazo de entrega destacado: 'LP em até 5 dias úteis' gera urgência e credibilidade", tags:["copy"] },
+      { id:"l3", label:"Explicar o processo: briefing → design → revisão → entrega — reduz medo de comprar", tags:["ux","copy"] },
+      { id:"l4", label:"Mostrar métricas das LPs entregues se possível: taxa de conversão, leads gerados", tags:["copy"] },
+      { id:"l5", label:"Pacotes claros: básico, intermediário, premium — facilita decisão", tags:["copy","ux"] },
+    ]
+  },
+];
+
+const state = {};
+DATA.forEach(s => s.items.forEach(i => state[i.id] = false));
+
+function tagHtml(tags) {
+  const map = { seo:'tag-seo', ux:'tag-ux', copy:'tag-copy', tech:'tag-tech' };
+  const label = { seo:'SEO', ux:'UX', copy:'Copy', tech:'Tech' };
+  return tags.map(t => `<span class="item-tag ${map[t]}">${label[t]}</span>`).join(' ');
+}
+
+function toggle(id) {
+  state[id] = !state[id];
+  const cb = document.querySelector(`[data-id="${id}"] .checkbox`);
+  const lbl = document.querySelector(`[data-id="${id}"] .item-label`);
+  cb.classList.toggle('checked', state[id]);
+  lbl.classList.toggle('checked', state[id]);
+  updateProgress();
+}
+
+function toggleSection(sid) {
+  const items = document.getElementById('items-'+sid);
+  const chev = document.getElementById('chev-'+sid);
+  const open = items.classList.toggle('open');
+  chev.classList.toggle('open', open);
+}
+
+function updateProgress() {
+  const total = Object.keys(state).length;
+  const done = Object.values(state).filter(Boolean).length;
+  document.getElementById('progress-text').textContent = `${done} / ${total} concluídos`;
+  document.getElementById('progress-fill').style.width = (done/total*100)+'%';
+  document.getElementById('score-text').textContent = done === total ? '✓ Checklist completo!' : '';
+}
+
+function resetAll() {
+  Object.keys(state).forEach(k => state[k] = false);
+  document.querySelectorAll('.checkbox').forEach(el => el.classList.remove('checked'));
+  document.querySelectorAll('.item-label').forEach(el => el.classList.remove('checked'));
+  updateProgress();
+}
+
+function render() {
+  const cont = document.getElementById('sections');
+  cont.innerHTML = DATA.map(sec => `
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('${sec.id}')">
+        <span class="section-title">${sec.title}</span>
+        <span class="badge ${sec.badgeClass}">${sec.badge}</span>
+        <span class="chevron" id="chev-${sec.id}">▶</span>
+      </div>
+      <div class="items open" id="items-${sec.id}">
+        ${sec.items.map(item => `
+          <div class="item" data-id="${item.id}" onclick="toggle('${item.id}')">
+            <div class="checkbox ${state[item.id]?'checked':''}"></div>
+            <div style="flex:1">
+              <div class="item-label ${state[item.id]?'checked':''}">${item.label}</div>
+              <div style="display:flex;gap:4px;margin-top:3px">${tagHtml(item.tags)}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  updateProgress();
+}
+
+render();
+</script>
