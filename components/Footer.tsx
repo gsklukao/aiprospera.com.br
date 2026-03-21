@@ -51,7 +51,7 @@ export default function Footer() {
                 <Mail size={15} /> contato@aiprospera.com.br
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
-                <Phone size={15} /> (11) 9xxxx-xxxx
+                <Phone size={15} /> (16) 92000-9428
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
                 <MapPin size={15} /> São Paulo, SP
@@ -73,7 +73,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} AiProspera - Soluções. Todos os direitos reservados.
           </p>
           <p style={{ color: 'var(--color-text-dim)', fontSize: '0.8rem' }}>
-            Feito com IA para humanos incríveis
+            Tecnologia que resolve seu problema
           </p>
         </div>
       </div>
