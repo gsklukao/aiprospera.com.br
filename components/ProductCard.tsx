@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { ShoppingCart, ExternalLink, Star } from 'lucide-react';
 
@@ -35,10 +37,12 @@ export default function ProductCard({
         flexDirection: 'column',
         height: '100%',
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative',
+        background: 'var(--color-bg-glass)',
+        borderRadius: 'var(--radius-xl)',
+        border: '1px solid var(--color-border)',
       }}
     >
-      {/* Product Image */}
       <div style={{ position: 'relative', overflow: 'hidden', height: '200px' }}>
         <img
           src={image}
@@ -49,10 +53,9 @@ export default function ProductCard({
             objectFit: 'cover',
             transition: 'transform 0.5s ease'
           }}
-          className="product-image-hover"
+          className="product-image-transition"
         />
         
-        {/* Badges */}
         <div style={{ position: 'absolute', top: '1rem', right: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end' }}>
           <span className="badge-pill" style={{ fontSize: '0.7rem', padding: '0.2rem 0.6rem', background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(4px)', borderColor: 'var(--color-primary)' }}>
             {category.toUpperCase()}
@@ -65,7 +68,6 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* Product Info */}
       <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.5rem' }}>
           {[...Array(5)].map((_, i) => (
@@ -75,7 +77,7 @@ export default function ProductCard({
         </div>
 
         <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--color-text-main)' }}>{title}</h3>
-        <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', lineClamp: '2', WebkitLineClamp: '2', display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+        <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
           {description}
         </p>
 
@@ -94,9 +96,8 @@ export default function ProductCard({
           </div>
         </div>
       </div>
-
-      <style>{`
-        .product-image-hover:hover {
+      <style jsx>{`
+        .product-image-transition:hover {
           transform: scale(1.1);
         }
       `}</style>
