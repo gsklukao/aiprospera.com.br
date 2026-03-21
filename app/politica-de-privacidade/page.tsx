@@ -6,7 +6,7 @@ export default function PoliticasPrivacidade() {
       <div>
         <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>1. Introdução</h2>
         <p>
-          A <strong>AiProspera - Soluções</strong> valoriza a sua privacidade e se compromete a proteger os dados pessoais de seus clientes e usuários. Esta Política de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas informações ao utilizar nossos serviços e nossa plataforma.
+          A <strong>AiProspera - Soluções</strong> valoriza a sua privacidade e se compromete a proteger os dados pessoais de seus clientes e usuários em total conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018)</strong>. Esta Política de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas informações.
         </p>
       </div>
 
@@ -32,16 +32,27 @@ export default function PoliticasPrivacidade() {
       </div>
 
       <div>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>4. Compartilhamento de Dados</h2>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>4. Seus Direitos (LGPD)</h2>
+        <p>Como titular de dados, você possui os seguintes direitos:</p>
+        <ul style={{ paddingLeft: 'var(--space-lg)', marginTop: 'var(--space-xs)' }}>
+          <li>Confirmar a existência de tratamento de seus dados.</li>
+          <li>Acessar, corrigir ou atualizar suas informações.</li>
+          <li>Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários.</li>
+          <li>Revogar seu consentimento a qualquer momento.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>5. Compartilhamento de Dados</h2>
         <p>
           Não vendemos ou alugamos seus dados pessoais a terceiros. Podemos compartilhar suas informações estritamente com prestadores de serviço terceirizados que nos auxiliam a operar a inteligência artificial (como infraestruturas de nuvem e provedores de LLMs).
         </p>
       </div>
 
       <div>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>5. Contato</h2>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>6. Contato do DPO</h2>
         <p>
-          Em caso de dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail: <strong>contato@aiprospera.com.br</strong>
+          Para exercer seus direitos ou tirar dúvidas sobre esta política, entre em contato com nosso Encarregado de Dados pelo e-mail: <strong>contato@aiprospera.com.br</strong>
         </p>
       </div>
     </PolicyLayout>

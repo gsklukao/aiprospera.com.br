@@ -11,9 +11,9 @@ export default function TermosUso() {
       </div>
 
       <div>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>2. Descrição dos Serviços</h2>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>2. Descrição e Natureza dos Serviços</h2>
         <p>
-          A AiProspera fornece soluções de inteligência artificial aplicadas a automações comerciais, incluindo chatbots, agentes de voz e sistemas de análise financeira/logística. Nossos serviços são fornecidos "como estão" e estão sujeitos a evoluções tecnológicas constantes.
+          A AiProspera fornece soluções baseadas em modelos probabilísticos de <strong>Inteligência Artificial</strong>. Nossos serviços incluem automações, chatbots e agentes de voz. Devido à natureza da tecnologia de IA (LLMs), os resultados gerados podem conter imprecisões ou informações incorretas ("alucinações").
         </p>
       </div>
 
@@ -37,8 +37,14 @@ export default function TermosUso() {
       <div>
         <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)', color: 'var(--color-text-main)' }}>5. Limitação de Responsabilidade</h2>
         <p>
-          A AiProspera não se responsabiliza por perdas de receita causadas por interrupções em serviços de terceiros (Meta/WhatsApp, OpenAI, Evoluton API, servidores de nuvem) ou por decisões de negócios tomadas com base nas informações geradas pelos agentes de IA.
+          A <strong>AiProspera - Soluções</strong> atua como fornecedora de tecnologia e não se responsabiliza por:
         </p>
+        <ul style={{ paddingLeft: 'var(--space-lg)', marginTop: 'var(--space-xs)' }}>
+          <li>Mensagens ou conteúdos gerados automaticamente que venham a ser interpretados como ofensivos ou incorretos (o usuário deve configurar filtros e validar outputs).</li>
+          <li>Instabilidades ou mudanças súbitas nas políticas de APIs de terceiros (Meta/WhatsApp, OpenAI, Anthropic).</li>
+          <li>Banimento de números de WhatsApp por descumprimento das regras da Meta pelo usuário final.</li>
+          <li>Decisões financeiras ou de negócios tomadas sem validação humana primária.</li>
+        </ul>
       </div>
     </PolicyLayout>
   );
