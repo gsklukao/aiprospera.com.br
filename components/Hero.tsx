@@ -6,9 +6,9 @@ import { Zap, ArrowRight, ChevronDown, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 const bullets = [
-  'Transforme cada conversa no WhatsApp em uma oportunidade de lucro.',
-  'Recupere automaticamente carrinhos abandonados e boletos vencidos.',
-  'Escale sua operação de vendas sem contratar novos vendedores agora.',
+  'Fluxos de conversa que levam do "Oi" ao pagamento sem intervenção humana.',
+  'Robô que persegue carrinhos, boletos e PIX não pagos 24h por dia.',
+  'Filtro inteligente que entrega só leads quentes para o seu comercial.',
 ];
 
 export default function Hero() {
@@ -44,7 +44,7 @@ export default function Hero() {
           >
             <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)', display: 'inline-flex' }}>
               <Zap size={14} />
-              <span>A Máquina de Vendas Automática no WhatsApp</span>
+              <span>Máquina de Vendas com IA no WhatsApp</span>
             </div>
 
             <h1
@@ -54,8 +54,8 @@ export default function Hero() {
                 marginBottom: 'var(--space-lg)',
               }}
             >
-              Venda mais com{' '}
-              <span className="text-gradient">fluxos automáticos </span>
+              Pare de perder{' '}
+              <span className="text-gradient">vendas </span>
               no WhatsApp
             </h1>
 
@@ -68,7 +68,7 @@ export default function Hero() {
                 lineHeight: 1.8,
               }}
             >
-              Converta visitantes em clientes em minutos, automatize o fechamento de vendas e recupere ativos abandonados sem precisar de interação humana constante. Inteligência que vende enquanto você escala.
+              A primeira Máquina de Vendas com IA que atende, responde, recupera carrinhos abandonados e cobra PIX não pagos 24h por dia — enquanto seu time fala só com quem está pronto para comprar.
             </p>
           </motion.div>
 
@@ -118,20 +118,13 @@ export default function Hero() {
             style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}
           >
             <Link
-              href="/#cta"
+              href="https://wa.me/5511999999999?text=Quero+ativar+minha+m%C3%A1quina+de+vendas+no+WhatsApp"
+              target="_blank"
               className="btn-primary"
               style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}
               id="hero-cta-main"
             >
-              Criar meu fluxo de vendas <ArrowRight size={18} />
-            </Link>
-            <Link
-              href="/#solucoes"
-              className="btn-secondary"
-              style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}
-              id="hero-cta-sec"
-            >
-              Ver demonstração de vendas
+              Quero ativar minha Máquina de Vendas <ArrowRight size={18} />
             </Link>
           </motion.div>
         </div>

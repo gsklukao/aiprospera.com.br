@@ -6,7 +6,8 @@ import {
   RotateCcw,
   UserPlus,
   CheckCircle2,
-  Rocket
+  Rocket,
+  Brain
 } from 'lucide-react';
 
 const fadeInUp: Variants = {
@@ -24,22 +25,29 @@ const solutions = [
     icon: <TrendingUp size={26} color="var(--color-primary)" />,
     boxClass: '',
     title: 'Fluxos de Alta Conversão',
-    desc: 'Roteiros automatizados que guiam o seu cliente do "Oi" ao checkout sem atrito, derrubando objeções na hora.',
-    bullets: ['Scripts otimizados', 'Fechamento automático', 'Atendimento 24h'],
+    desc: 'Roteiros de conversa que levam o cliente do primeiro "Oi" até o pagamento sem seu time precisar digitar tudo na mão.',
+    bullets: ['Scripts otimizados por nicho', 'Fechamento automático', 'Atendimento 24h'],
   },
   {
     icon: <RotateCcw size={26} color="var(--color-secondary-light)" />,
     boxClass: 'icon-box-secondary',
-    title: 'Recuperador de Vendas 24/7',
-    desc: 'O robô identifica e persegue carrinhos abandonados, PIX não pagos e boletos vencidos via WhatsApp.',
-    bullets: ['Recuperação em minutos', 'Lembretes amigáveis', 'Aumento imediato de ROI'],
+    title: 'Recuperador Automático de Vendas',
+    desc: 'Um robô que persegue carrinhos abandonados, PIX não pagos e boletos vencidos 24h por dia, com mensagens humanas e sem ser chato.',
+    bullets: ['Recuperação em minutos', 'Tom natural e amigável', 'ROI imediato'],
   },
   {
     icon: <UserPlus size={26} color="var(--color-accent)" />,
     boxClass: 'icon-box-accent',
-    title: 'Qualificação de Leads',
-    desc: 'Separamos os curiosos dos compradores reais. Entregue apenas leads "quentes" para o seu time comercial escalar.',
+    title: 'Filtro e Qualificação de Leads',
+    desc: 'A IA separa curiosos de compradores de verdade e entrega só os quentes para o time comercial focar em fechar.',
     bullets: ['Filtro inteligente', 'Agendamento automático', 'Foco no que dá lucro'],
+  },
+  {
+    icon: <Brain size={26} color="var(--color-primary)" />,
+    boxClass: '',
+    title: 'Inteligência de Fechamento',
+    desc: 'Tira dúvidas, derruba objeções e ajuda o cliente a decidir pela compra na hora — sem pressão e sem script genérico.',
+    bullets: ['Objeções respondidas na hora', 'Linguagem adaptada ao perfil', 'Mais decisões de compra'],
   },
 ];
 
@@ -55,13 +63,14 @@ export default function Solutions() {
           className="section-header"
         >
           <div className="badge-pill" style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}>
-            <Rocket size={14} /> NOSSA TECNOLOGIA
+            <Rocket size={14} /> O QUE A MÁQUINA FAZ
           </div>
           <h2 className="section-title">
-            O que oferecemos para o seu <span className="text-gradient">negócio</span>
+            O que a sua Máquina de Vendas no{' '}
+            <span className="text-gradient">WhatsApp</span> faz por você
           </h2>
           <p className="section-subtitle">
-            Três pilares fundamentais para transformar seu WhatsApp em uma verdadeira máquina de lucro contínuo.
+            Você tira o peso do atendimento braçal. A gente foca em transformar conversas em faturamento.
           </p>
         </motion.div>
 

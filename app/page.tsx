@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import PainSection from "@/components/PainSection";
 import Stats from "@/components/Stats";
 import Solutions from "@/components/Solutions";
 import Ecosystem from "@/components/Ecosystem";
@@ -8,9 +9,9 @@ import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 
 export const metadata: Metadata = {
-  title: "AiProspera — Venda mais com fluxos automáticos no WhatsApp",
+  title: "AiProspera — Máquina de Vendas com IA no WhatsApp",
   description:
-    "Converta leads em clientes, recupere carrinhos abandonados e feche mais vendas com inteligência artificial no WhatsApp. Diagnóstico gratuito.",
+    "A primeira Máquina de Vendas com IA que atende, recupera carrinhos abandonados e cobra PIX não pagos 24h por dia. Comece agora pelo WhatsApp.",
 };
 
 export default function Home() {
@@ -56,16 +57,19 @@ export default function Home() {
       {/* 1. Promessa forte */}
       <Hero />
 
-      {/* 2. Prova em números */}
+      {/* 2. Dor — esfrega o problema antes da solução */}
+      <PainSection />
+
+      {/* 3. Prova em números */}
       <Stats />
 
-      {/* 3. O que oferecemos (3 pilares de venda) */}
+      {/* 4. O que a Máquina faz (4 pilares) */}
       <Solutions />
 
-      {/* 4. Por que AiProspera (diferenciais) */}
+      {/* 5. Por que AiProspera (diferenciais) */}
       <Ecosystem />
 
-      {/* 5. Como funciona (3 passos) */}
+      {/* 6. Como funciona (3 passos) */}
       <Timeline />
 
       {/* 6. FAQ */}
