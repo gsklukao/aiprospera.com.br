@@ -29,10 +29,10 @@ function useCountUp(end: number, duration: number = 2000) {
 }
 
 const stats = [
-  { value: 90, suffix: '%', label: 'Redução de custo operacional em atendimento e cobrança' },
-  { value: 3,  suffix: 'x',  label: 'Mais capacidade de atendimento simultâneo sem contratar ninguém' },
-  { value: 24, suffix: '/7', label: 'Disponível em WhatsApp, voz e chat sem interrupção' },
-  { value: 2,  suffix: 'M+', label: 'R$ recuperados com rotinas de cobrança contínuas e personalizadas' },
+  { value: 45, suffix: '%', label: 'Média de aumento na conversão direta' },
+  { value: 3,  suffix: 'x',  label: 'Multiplique seu ROI sem contratar vendedores' },
+  { value: 85, suffix: '%', label: 'Taxa de recuperação de carrinhos e PIX' },
+  { value: 24, suffix: '/7', label: 'Vendas rodando no automático o dia todo' },
 ];
 
 export default function Stats() {
@@ -49,12 +49,10 @@ export default function Stats() {
           style={{ marginBottom: 'var(--space-2xl)' }}
         >
           <h2 className="section-title">
-            Resultados que um time humano sozinho{' '}
-            <span className="text-gradient">não alcança</span>
+            Resultados reais para o seu <span className="text-gradient">faturamento</span>
           </h2>
           <p className="section-subtitle">
-            Funcionários Digitais da AiProspera trabalham sem pausa, sem erros por cansaço e sem
-            gargalos de escala.
+            O robô de vendas da AiProspera entrega performance que um time humano sozinho não alcança pela falta de escala.
           </p>
         </motion.div>
 
@@ -109,7 +107,7 @@ function StatItem({
           {suffix}
         </span>
       </div>
-      <div className="stat-label" style={{ maxWidth: '160px', margin: '0 auto', lineHeight: 1.4 }}>
+      <div className="stat-label" style={{ maxWidth: '180px', margin: '0 auto', lineHeight: 1.4 }}>
         {label}
       </div>
     </div>

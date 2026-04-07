@@ -2,11 +2,11 @@
 
 import { motion, Variants } from 'framer-motion';
 import {
-  MessageSquare,
-  DollarSign,
-  UserCheck,
-  HeartHandshake,
+  TrendingUp,
+  RotateCcw,
+  UserPlus,
   CheckCircle2,
+  Rocket
 } from 'lucide-react';
 
 const fadeInUp: Variants = {
@@ -19,46 +19,27 @@ const staggerContainer: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
-const useCases = [
+const solutions = [
   {
-    icon: <MessageSquare size={26} color="var(--color-primary)" />,
+    icon: <TrendingUp size={26} color="var(--color-primary)" />,
     boxClass: '',
-    title: 'Atendimento ao cliente multicanal',
-    bullets: [
-      'Responde dúvidas frequentes em segundos',
-      'Atualiza status de pedidos automaticamente',
-      'Redireciona casos complexos para humanos',
-    ],
+    title: 'Fluxos de Alta Conversão',
+    desc: 'Roteiros automatizados que guiam o seu cliente do "Oi" ao checkout sem atrito, derrubando objeções na hora.',
+    bullets: ['Scripts otimizados', 'Fechamento automático', 'Atendimento 24h'],
   },
   {
-    icon: <DollarSign size={26} color="var(--color-secondary-light)" />,
+    icon: <RotateCcw size={26} color="var(--color-secondary-light)" />,
     boxClass: 'icon-box-secondary',
-    title: 'Cobrança e recuperação de crédito',
-    bullets: [
-      'Lembra vencimentos e boletos atrasados',
-      'Negocia condições de pagamento conforme suas regras',
-      'Acompanha a jornada até a regularização',
-    ],
+    title: 'Recuperador de Vendas 24/7',
+    desc: 'O robô identifica e persegue carrinhos abandonados, PIX não pagos e boletos vencidos via WhatsApp.',
+    bullets: ['Recuperação em minutos', 'Lembretes amigáveis', 'Aumento imediato de ROI'],
   },
   {
-    icon: <UserCheck size={26} color="var(--color-accent)" />,
+    icon: <UserPlus size={26} color="var(--color-accent)" />,
     boxClass: 'icon-box-accent',
-    title: 'Qualificação de leads e pré-vendas',
-    bullets: [
-      'Faz perguntas-chave para qualificar leads automaticamente',
-      'Agenda contatos com o time comercial',
-      'Nutre interessados com as informações certas',
-    ],
-  },
-  {
-    icon: <HeartHandshake size={26} color="var(--color-primary)" />,
-    boxClass: '',
-    title: 'Pós-venda e fidelização',
-    bullets: [
-      'Pesquisa de satisfação automatizada',
-      'Ofertas de upsell e cross-sell inteligentes',
-      'Reativação de clientes inativos',
-    ],
+    title: 'Qualificação de Leads',
+    desc: 'Separamos os curiosos dos compradores reais. Entregue apenas leads "quentes" para o seu time comercial escalar.',
+    bullets: ['Filtro inteligente', 'Agendamento automático', 'Foco no que dá lucro'],
   },
 ];
 
@@ -73,13 +54,14 @@ export default function Solutions() {
           variants={fadeInUp}
           className="section-header"
         >
+          <div className="badge-pill" style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}>
+            <Rocket size={14} /> NOSSA TECNOLOGIA
+          </div>
           <h2 className="section-title">
-            Onde os Funcionários Digitais{' '}
-            <span className="text-gradient">mais geram resultado</span>
+            O que oferecemos para o seu <span className="text-gradient">negócio</span>
           </h2>
           <p className="section-subtitle">
-            Cada agente é treinado para dominar um fluxo específico do seu negócio — e executá-lo
-            em escala, sem pausa.
+            Três pilares fundamentais para transformar seu WhatsApp em uma verdadeira máquina de lucro contínuo.
           </p>
         </motion.div>
 
@@ -90,11 +72,11 @@ export default function Solutions() {
           variants={staggerContainer}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: 'var(--space-xl)',
           }}
         >
-          {useCases.map((item, i) => (
+          {solutions.map((item, i) => (
             <motion.div
               key={i}
               variants={fadeInUp}
@@ -104,30 +86,32 @@ export default function Solutions() {
               <div className={`icon-box ${item.boxClass}`}>{item.icon}</div>
               <h3
                 style={{
-                  fontSize: '1.2rem',
+                  fontSize: '1.4rem',
                   marginTop: 'var(--space-lg)',
-                  marginBottom: 'var(--space-md)',
+                  marginBottom: 'var(--space-sm)',
                 }}
               >
                 {item.title}
               </h3>
+              <p style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-lg)', lineHeight: 1.6 }}>
+                {item.desc}
+              </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 {item.bullets.map((b, j) => (
                   <li
                     key={j}
                     style={{
                       display: 'flex',
-                      alignItems: 'flex-start',
+                      alignItems: 'center',
                       gap: '0.55rem',
-                      color: 'var(--color-text-muted)',
-                      fontSize: '0.95rem',
-                      lineHeight: 1.5,
+                      color: 'var(--color-text-dim)',
+                      fontSize: '0.9rem',
                     }}
                   >
                     <CheckCircle2
                       size={15}
                       color="var(--color-primary)"
-                      style={{ marginTop: '0.2rem', flexShrink: 0 }}
+                      style={{ flexShrink: 0 }}
                     />
                     {b}
                   </li>

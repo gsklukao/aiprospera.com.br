@@ -1,24 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Zap, ArrowRight, ChevronDown, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 const bullets = [
-  'Atenda clientes em segundos, 24 horas por dia, em todos os canais.',
-  'Automatize cobranças e recuperação de crédito de forma inteligente e personalizada.',
-  'Escale sua operação sem aumentar a folha de pagamento.',
+  'Transforme cada conversa no WhatsApp em uma oportunidade de lucro.',
+  'Recupere automaticamente carrinhos abandonados e boletos vencidos.',
+  'Escale sua operação de vendas sem contratar novos vendedores agora.',
 ];
 
 export default function Hero() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <section
       id="hero"
@@ -51,7 +44,7 @@ export default function Hero() {
           >
             <div className="badge-pill" style={{ marginBottom: 'var(--space-lg)', display: 'inline-flex' }}>
               <Zap size={14} />
-              <span>A revolução da automação para PMEs e e-commerces</span>
+              <span>A Máquina de Vendas Automática no WhatsApp</span>
             </div>
 
             <h1
@@ -61,23 +54,21 @@ export default function Hero() {
                 marginBottom: 'var(--space-lg)',
               }}
             >
-              Funcionários Digitais que atendem,<br />
-              cobram e{' '}
-              <span className="text-gradient">convertem por você 24/7</span>
+              Venda mais com{' '}
+              <span className="text-gradient">fluxos automáticos </span>
+              no WhatsApp
             </h1>
 
             <p
               style={{
-                fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
+                fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
                 color: 'var(--color-text-muted)',
-                maxWidth: '720px',
+                maxWidth: '780px',
                 margin: '0 auto var(--space-xl)',
                 lineHeight: 1.8,
               }}
             >
-              AiProspera cria agentes de IA super-especializados que assumem o atendimento multicanal
-              (WhatsApp, voz e chat) e a recuperação de crédito da sua empresa, reduzindo custos
-              operacionais em até 90% sem perder o toque humano.
+              Converta visitantes em clientes em minutos, automatize o fechamento de vendas e recupere ativos abandonados sem precisar de interação humana constante. Inteligência que vende enquanto você escala.
             </p>
           </motion.div>
 
@@ -104,13 +95,13 @@ export default function Hero() {
                   alignItems: 'flex-start',
                   gap: '0.6rem',
                   color: 'var(--color-text-muted)',
-                  fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-                  maxWidth: '620px',
+                  fontSize: 'clamp(0.9rem, 1.4vw, 1.1rem)',
+                  maxWidth: '680px',
                   textAlign: 'left',
                 }}
               >
                 <CheckCircle2
-                  size={18}
+                  size={20}
                   color="var(--color-primary)"
                   style={{ marginTop: '0.18rem', flexShrink: 0 }}
                 />
@@ -127,20 +118,20 @@ export default function Hero() {
             style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', flexWrap: 'wrap' }}
           >
             <Link
-              href="/#como-comecar"
+              href="/#cta"
               className="btn-primary"
               style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}
-              id="hero-cta-primary"
+              id="hero-cta-main"
             >
-              Quero reduzir meus custos <ArrowRight size={18} />
+              Criar meu fluxo de vendas <ArrowRight size={18} />
             </Link>
             <Link
-              href="/#como-funciona"
+              href="/#solucoes"
               className="btn-secondary"
               style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}
-              id="hero-cta-secondary"
+              id="hero-cta-sec"
             >
-              Ver como funciona na prática
+              Ver demonstração de vendas
             </Link>
           </motion.div>
         </div>
@@ -163,7 +154,7 @@ export default function Hero() {
         }}
       >
         <span style={{ fontSize: '0.7rem', color: 'var(--color-text-dim)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-          Scroll
+          Explore
         </span>
         <motion.div
           animate={{ y: [0, 5, 0] }}

@@ -6,58 +6,37 @@ import { ChevronDown } from 'lucide-react';
 
 const faqData = [
   {
-    q: 'Em quanto tempo consigo colocar um Funcionário Digital em operação?',
-    a: 'Depende da complexidade dos seus processos e integrações, mas em muitos casos conseguimos colocar o primeiro agente operando em poucas semanas. Na etapa de diagnóstico estimamos o prazo exato para o seu caso.',
+    q: 'Como a AiProspera ajuda a aumentar as vendas?',
+    a: 'Nossa IA automatiza o processo de vendas no WhatsApp: ela tira dúvidas, derruba objeções e guia o cliente até o pagamento, 24 horas por dia, sem perder leads por falta de atendimento.'
   },
   {
-    q: 'Ele substitui totalmente minha equipe?',
-    a: 'Não é esse o objetivo. O Funcionário Digital assume o volume repetitivo e previsível, liberando seu time para lidar com casos complexos e relacionamento estratégico — onde o humano faz a diferença.',
+    q: 'Posso usar meu número atual do WhatsApp?',
+    a: 'Sim, você pode conectar seu número de negócio à nossa plataforma. A IA assumirá os fluxos de vendas e recuperação de forma transparente.'
   },
   {
-    q: 'Preciso ter equipe técnica para usar a AiProspera?',
-    a: 'Não. Cuidamos de toda a parte técnica e guiamos sua equipe em tudo que for necessário para o dia a dia. Você recebe um acompanhamento contínuo sem precisar escrever uma linha de código.',
+    q: 'Como funciona a recuperação de carrinhos e boletos?',
+    a: 'A IA identifica clientes que iniciaram uma compra mas não finalizaram (carrinho, PIX gerado ou boleto) e envia mensagens automáticas inteligentes para incentivar a conclusão do pagamento.'
   },
   {
-    q: 'Funciona com o meu sistema atual?',
-    a: 'Trabalhamos para integrar com as principais ferramentas de CRM, ERP, atendimento e cobrança. Na etapa de diagnóstico avaliamos o que você usa hoje e desenhamos a melhor forma de conectar.',
+    q: 'Quais áreas do meu negócio podem ser automatizadas?',
+    a: 'Principalmente o atendimento inicial, qualificação de leads, fechamento de vendas diretas e recuperação de pagamentos pendentes. Tudo o que for repetitivo e focado em conversão.'
   },
   {
-    q: 'É seguro e está em conformidade com a LGPD?',
-    a: 'Sim. Seguimos boas práticas de segurança e privacidade de dados, utilizamos criptografia no tráfego de informações e estruturamos o uso da IA considerando a LGPD e demais normas aplicáveis.',
-  },
-  {
-    q: 'Como a IA da AiProspera se diferencia de chatbots comuns?',
-    a: 'Nossos agentes são alimentados por LLMs especializados que compreendem contexto, intenção e sentimento. Ao invés de menus rígidos de botões, mantemos conversas naturais e humanizadas que realmente resolvem os problemas do cliente.',
-  },
+    q: 'É seguro integrar com meu sistema de pagamentos?',
+    a: 'Sim. Utilizamos conexões seguras e criptografadas para monitorar status de pedidos e pagamentos, garantindo a privacidade dos dados e a precisão da operação, em total conformidade com a LGPD.'
+  }
 ];
 
 export default function FAQ() {
   return (
     <section id="faq" style={{ padding: 'var(--space-4xl) 0' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="section-header"
-        >
-          <h2 className="section-title">
-            Perguntas <span className="text-gradient">Frequentes</span>
-          </h2>
-          <p className="section-subtitle">
-            Tire suas dúvidas sobre como os Funcionários Digitais funcionam na prática.
-          </p>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="section-header">
+          <h2 className="section-title">Dúvidas <span className="text-gradient">Frequentes</span></h2>
+          <p className="section-subtitle">Tudo o que você precisa saber para começar a vender mais com IA.</p>
         </motion.div>
 
-        <div
-          style={{
-            maxWidth: '750px',
-            margin: '0 auto',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--space-md)',
-          }}
-        >
+        <div style={{ maxWidth: '750px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
           {faqData.map((item, i) => (
             <FaqItem key={i} q={item.q} a={item.a} index={i} />
           ))}
@@ -70,19 +49,18 @@ export default function FAQ() {
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.06 }}
-      className="faq-item"
+      transition={{ delay: index * 0.05 }}
+      className="faq-item" 
       style={{ background: 'var(--color-bg-glass)' }}
     >
       <button
         className="faq-trigger"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        id={`faq-item-${index}`}
       >
         <span>{q}</span>
         <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>

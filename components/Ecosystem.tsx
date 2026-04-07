@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { Target, Plug, Users2, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Target, Zap, BarChart2, Shield, CheckCircle2 } from 'lucide-react';
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -17,26 +17,26 @@ const differentials = [
   {
     icon: <Target size={26} color="var(--color-primary)" />,
     boxClass: '',
-    title: 'Foco em PMEs, e-commerces e serviços',
-    desc: 'Não oferecemos soluções genéricas. Desenhamos agentes pensando na sua realidade operacional e orçamento.',
+    title: 'Estratégia personalizada para o seu nicho',
+    desc: 'Não usamos scripts genéricos. Cada fluxo de vendas é montado conforme o seu produto, público e processo de fechamento.',
   },
   {
-    icon: <Plug size={26} color="var(--color-secondary-light)" />,
+    icon: <Zap size={26} color="var(--color-secondary-light)" />,
     boxClass: 'icon-box-secondary',
-    title: 'Integração com seus sistemas',
-    desc: 'Conectamos com CRM, ERP, gateways de pagamento e as principais ferramentas de atendimento que você já usa.',
+    title: 'Ativo 24/7, pronto para fechar',
+    desc: 'Enquanto você dorme, o robô está qualificando leads, respondendo objeções e convertendo clientes sem perder timing.',
   },
   {
-    icon: <Users2 size={26} color="var(--color-accent)" />,
+    icon: <BarChart2 size={26} color="var(--color-accent)" />,
     boxClass: 'icon-box-accent',
-    title: 'Time humano por trás da IA',
-    desc: 'Acompanhamos as métricas, ajustamos fluxos e garantimos que o agente evolua com o seu negócio ao longo do tempo.',
+    title: 'Métricas claras de faturamento',
+    desc: 'Acompanhe em tempo real quantas vendas foram fechadas, quantos boletos recuperados e qual o ROI gerado pela IA.',
   },
   {
-    icon: <ShieldCheck size={26} color="var(--color-primary)" />,
+    icon: <Shield size={26} color="var(--color-primary)" />,
     boxClass: '',
-    title: 'Segurança e conformidade',
-    desc: 'Tratamento responsável de dados, criptografia e estrutura adequada à LGPD e demais normas aplicáveis.',
+    title: 'Seguro e em conformidade com a LGPD',
+    desc: 'Seus dados e os dos seus clientes são protegidos com criptografia e boas práticas de privacidade em todos os fluxos.',
   },
 ];
 
@@ -47,8 +47,7 @@ export default function Ecosystem() {
         style={{
           position: 'absolute',
           inset: 0,
-          background:
-            'linear-gradient(180deg, transparent 0%, rgba(0,240,255,0.02) 50%, transparent 100%)',
+          background: 'linear-gradient(180deg, transparent 0%, rgba(0,240,255,0.02) 50%, transparent 100%)',
           zIndex: -1,
         }}
       />
@@ -60,19 +59,14 @@ export default function Ecosystem() {
           variants={fadeInUp}
           className="section-header"
         >
-          <div
-            className="badge-pill badge-pill-secondary"
-            style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}
-          >
+          <div className="badge-pill badge-pill-secondary" style={{ marginBottom: 'var(--space-md)', display: 'inline-flex' }}>
             POR QUE AIPROSPERA
           </div>
           <h2 className="section-title">
-            Por que escolher a AiProspera para seus{' '}
-            <span className="text-gradient">Funcionários Digitais</span>
+            Por que vender com a <span className="text-gradient">AiProspera</span>
           </h2>
           <p className="section-subtitle">
-            Combinamos tecnologia de ponta com acompanhamento humano contínuo para entregar
-            resultados reais no seu negócio.
+            Não somos mais um chatbot. Somos uma equipe de vendas digital treinada especificamente para o seu negócio.
           </p>
         </motion.div>
 
@@ -88,12 +82,7 @@ export default function Ecosystem() {
           }}
         >
           {differentials.map((item, i) => (
-            <motion.div
-              key={i}
-              variants={fadeInUp}
-              className="glass-card"
-              style={{ padding: 'var(--space-2xl)' }}
-            >
+            <motion.div key={i} variants={fadeInUp} className="glass-card" style={{ padding: 'var(--space-2xl)' }}>
               <div className={`icon-box ${item.boxClass}`}>{item.icon}</div>
               <h3 style={{ fontSize: '1.15rem', marginTop: 'var(--space-lg)', marginBottom: 'var(--space-sm)' }}>
                 {item.title}
