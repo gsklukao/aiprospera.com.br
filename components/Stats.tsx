@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion';
 function useCountUp(end: number, duration: number = 2000) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
   const hasStarted = useRef(false);
 
   useEffect(() => {
@@ -29,23 +29,43 @@ function useCountUp(end: number, duration: number = 2000) {
 }
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Empresas Atendidas' },
-  { value: 98, suffix: '%', label: 'Taxa de Satisfação' },
-  { value: 2, suffix: 'M+', label: 'R$ Recuperados/mês' },
-  { value: 10, suffix: 'k+', label: 'Horas Recuperadas/Mês' },
+  { value: 90, suffix: '%', label: 'Redução de custo operacional em atendimento e cobrança' },
+  { value: 3,  suffix: 'x',  label: 'Mais capacidade de atendimento simultâneo sem contratar ninguém' },
+  { value: 24, suffix: '/7', label: 'Disponível em WhatsApp, voz e chat sem interrupção' },
+  { value: 2,  suffix: 'M+', label: 'R$ recuperados com rotinas de cobrança contínuas e personalizadas' },
 ];
 
 export default function Stats() {
   return (
-    <section style={{ padding: 'var(--space-2xl) 0 var(--space-3xl)' }}>
+    <section id="resultados" style={{ padding: 'var(--space-2xl) 0 var(--space-3xl)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
+
+        {/* Cabeçalho */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="section-header"
+          style={{ marginBottom: 'var(--space-2xl)' }}
+        >
+          <h2 className="section-title">
+            Resultados que um time humano sozinho{' '}
+            <span className="text-gradient">não alcança</span>
+          </h2>
+          <p className="section-subtitle">
+            Funcionários Digitais da AiProspera trabalham sem pausa, sem erros por cansaço e sem
+            gargalos de escala.
+          </p>
+        </motion.div>
+
+        {/* Contador */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             borderRadius: 'var(--radius-2xl)',
             border: '1px solid var(--color-border)',
             background: 'var(--color-bg-glass)',
@@ -62,18 +82,36 @@ export default function Stats() {
   );
 }
 
-function StatItem({ value, suffix, label, isLast }: { value: number; suffix: string; label: string; isLast: boolean }) {
+function StatItem({
+  value,
+  suffix,
+  label,
+  isLast,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+  isLast: boolean;
+}) {
   const { count, ref } = useCountUp(value);
   return (
     <div
       ref={ref}
       className="stat-counter"
-      style={{ borderRight: !isLast ? '1px solid var(--color-border)' : 'none', padding: 'var(--space-2xl) var(--space-lg)' }}
+      style={{
+        borderRight: !isLast ? '1px solid var(--color-border)' : 'none',
+        padding: 'var(--space-2xl) var(--space-lg)',
+      }}
     >
       <div className="stat-number">
-        <span className="text-gradient-accent">{count}{suffix}</span>
+        <span className="text-gradient-accent">
+          {count}
+          {suffix}
+        </span>
       </div>
-      <div className="stat-label">{label}</div>
+      <div className="stat-label" style={{ maxWidth: '160px', margin: '0 auto', lineHeight: 1.4 }}>
+        {label}
+      </div>
     </div>
   );
 }
